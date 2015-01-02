@@ -1,0 +1,20 @@
+- new_note ||= false
+- id = new_note ? "new" : note.id
+.modal.fade{ "id" => "note_modal_#{id}","tabindex"=>"-1", "role" => "dialog", "aria-labelledby" => "mySmallModalLabel", "aria-hidden" => "true" }
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        Create New Note
+        %button.close{"type"=>"button", "data-dismiss"=>"modal"}
+          %span{"aria-hidden" => "true"}
+            %span.glyphicon.glyphicon-remove-circle
+          %span.sr-only
+            Close
+      .modal-body
+        = render partial: 'notes/form', locals: { modal: true, note: note }
+      .modal-footer
+        %button.close{"type"=>"button", "data-dismiss"=>"modal"}
+          %span{"aria-hidden" => "true"}
+            %span.glyphicon.glyphicon-remove-circle
+          %span.sr-only
+            Close

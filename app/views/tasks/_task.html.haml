@@ -1,0 +1,14 @@
+%tr{:id => "task_#{task.id}" }
+  %td
+    = task.name
+  %td
+    = task.description
+  %td
+    = task.percent_complete
+  %td
+    = task.status
+  %td
+    = l task.finish_date, format: :short if task.finish_date
+  %td
+    =link_to edit_polymorphic_path([@taskable, task]), remote: true do
+      %span.glyphicon.glyphicon-pencil

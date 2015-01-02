@@ -1,0 +1,13 @@
+%tr{:id => "idea_#{idea.id}"}
+  %td 
+    = link_to idea.name, idea_path(idea)
+  %td
+    = idea.notes.count
+  %td
+    TODO
+  %td
+    = link_to edit_idea_path(idea), remote: true do
+      %span.glyphicon.glyphicon-pencil
+  %td
+    = link_to idea_path(idea), method: :delete, remote: true, data: { confirm: 'Are you sure?' } do
+      %span.glyphicon.glyphicon-trash

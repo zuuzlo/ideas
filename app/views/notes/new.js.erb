@@ -1,0 +1,3 @@
+$('#modal').empty();
+$('#modal').append("<%= j (render partial: 'notes/shared/note_modal', locals: { new_note: true, note: @note }) %>");
+$('#note_modal_new').modal('toggle');

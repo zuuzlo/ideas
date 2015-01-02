@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216032507) do
+ActiveRecord::Schema.define(version: 20150101155841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,17 @@ ActiveRecord::Schema.define(version: 20141216032507) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
+
+  create_table "categories_ideas", id: false, force: true do |t|
+    t.integer "category_id", null: false
+    t.integer "idea_id",     null: false
+  end
+
+  add_index "categories_ideas", ["idea_id", "category_id"], name: "index_categories_ideas_on_idea_id_and_category_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -36,6 +46,55 @@ ActiveRecord::Schema.define(version: 20141216032507) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "ideas", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "benefits"
+    t.text     "problem_solves"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "status"
+  end
+
+  add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
+
+  create_table "notes", force: true do |t|
+    t.string   "title"
+    t.text     "text"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.integer  "notable_id"
+    t.string   "notable_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "notes", ["notable_id", "notable_type"], name: "index_notes_on_notable_id_and_notable_type", using: :btree
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
+
+  create_table "tasks", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "assigned_by"
+    t.integer  "assigned_to"
+    t.integer  "user_id"
+    t.integer  "percent_complete"
+    t.date     "start_date"
+    t.date     "finish_date"
+    t.date     "completion_date"
+    t.string   "status"
+    t.string   "slug"
+    t.integer  "taskable_id"
+    t.string   "taskable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "tasks", ["taskable_id", "taskable_type"], name: "index_tasks_on_taskable_id_and_taskable_type", using: :btree
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -9,11 +9,6 @@
     .container
       %header
         = render 'shared/header'
-      = render :partial => 'shared/messages'
-      - if notice
-        %p.alert.alert-success
-          = notice
-      -if alert
-        %p.alert.alert-danger
-          = alert
+      = #render 'shared/messages'
+      #flash_hook
       = yield

@@ -1,0 +1,23 @@
+- new_task ||= false
+- id = new_task ? "new" : task.id
+.modal.fade{ "id" => "task_modal_new","tabindex"=>"-1", "role" => "dialog", "aria-labelledby" => "mySmallModalLabel", "aria-hidden" => "true" }
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        - if id == "new"
+          Create New Task
+        - else
+          Edit Task
+        %button.close{"type"=>"button", "data-dismiss"=>"modal"}
+          %span{"aria-hidden" => "true"}
+            %span.glyphicon.glyphicon-remove-circle
+          %span.sr-only
+            Close
+      .modal-body
+        = render partial: 'tasks/form', locals: { modal: true, task: task }
+      .modal-footer
+        %button.close{"type"=>"button", "data-dismiss"=>"modal"}
+          %span{"aria-hidden" => "true"}
+            %span.glyphicon.glyphicon-remove-circle
+          %span.sr-only
+            Close

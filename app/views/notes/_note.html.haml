@@ -1,0 +1,18 @@
+.l3.s3{:id => "note_#{note.id}"}
+  .alert.alert-info
+    %h5
+      .l3.s3.text-left
+        <strong>Note</strong>
+      .l9.s9.text-right
+        = l note.created_at, format: :short
+    %h3
+      = note.title
+    %p
+      = note.text
+    %p
+      = link_to note_path(note) do
+        %span.glyphicon.glyphicon-eye-open
+      = link_to edit_polymorphic_path([@notable, note]), remote: true do
+        %span.glyphicon.glyphicon-pencil
+      = link_to polymorphic_path([@notable, note]), remote: true, method: :delete do
+        %span.glyphicon.glyphicon-trash

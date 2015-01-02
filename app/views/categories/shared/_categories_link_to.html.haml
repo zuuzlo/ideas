@@ -1,0 +1,4 @@
+-categories.each do |category|
+  = link_to remove_category_idea_path(idea, category_id: category.id), method: 'post', remote: true do
+    %span.glyphicon.glyphicon-remove
+  = link_to category.name, category_url(category)

@@ -1,0 +1,8 @@
+- modal ||= false
+- remote = modal ? true : false
+- data_model = note.id ? "edit_note_#{note.id}" : "new_note"
+= bootstrap_form_for([@notable, note], remote: remote, html: { role: :form, 'data-model' => "#{data_model}" }) do |f|
+  = f.text_field :title, help: "Must have title."
+  = f.text_area :text
+  = f.hidden_field :user_id, value: current_user.id
+  = f.button class: "btn btn-success"

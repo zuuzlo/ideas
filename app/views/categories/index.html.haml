@@ -1,2 +1,17 @@
-- @categories.each do |category|
-  = category.name
+%h1.page-header
+  Idea Categories
+#category-form{style: "display:none;"}
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        Category Name
+      %th
+        No. Ideas
+      %th
+        No. Notes
+      %th
+      %th
+  %tbody#categories
+    = render partial: @categories 
+= link_to "Add new category", new_category_path, remote: true

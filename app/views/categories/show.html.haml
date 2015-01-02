@@ -1,0 +1,31 @@
+%h1.page-header Category: #{@notable.name}
+.panel.panel-default
+  #headingOne.panel-heading{role: "tab"}
+    %h4.panel-title
+      = link_to "#{@notable.name} description", "#collapseOne",'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseOne"
+  #collapseOne.panel-collapse.collapse.in{ role: "tabpanel", 'aria-labelledby'=>"headingOne" }
+    .panel-body
+      #{@notable.description}
+.panel.panel-default
+  #headingTwo.panel-heading{role: "tab"}
+    %h4.panel-title
+      = link_to "#{@notable.name} Category Notes", "#collapseTwo", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseTwo"
+      = link_to new_polymorphic_path([@notable, @note]), remote: true, class: 'pull-right' do
+        %span.glyphicon.glyphicon-plus
+        New Note
+  #collapseTwo.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingTwo" }
+    .panel-body
+      #notes.l12.s12
+        = render @notable.notes
+.panel.panel-default
+  #headingThree.panel-heading{role: "tab"}
+    %h4.panel-title
+      = link_to "#{@notable.name} Category Ideas", "#collapseThree", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseThree"
+      = link_to new_idea_path, remote: true, class: 'pull-right' do
+        %span.glyphicon.glyphicon-plus
+        New Idea
+  #collapseThree.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingThree" }
+    .panel-body
+      = render partial: 'ideas/shared/ideas_table', locals:{ ideas: @ideas}
+#modal
+= #render partial: 'notes/shared/note_modal', locals: { new_note: true, note: @note }

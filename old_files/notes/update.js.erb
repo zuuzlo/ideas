@@ -1,0 +1,2 @@
+$('#note_modal_<%= @note.id %>').modal_success();
+$('#note_<%= @note.id %>').replaceWith("<%= j render partial: 'notes/note', locals: {note: @note } %>");

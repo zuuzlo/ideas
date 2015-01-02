@@ -1,7 +1,32 @@
 Rails.application.routes.draw do
   devise_for :users, :path => "accounts"
   #root to: 'devise/sessions#new'
-  resources :categories 
+  resources :ideas do
+    resources :notes do
+      :notes
+    end
+
+    resources :tasks do
+      :tasks
+    end
+
+    member do
+      post :update_status
+      post :remove_category
+    end
+  end
+
+  resources :categories do
+    resources :notes do
+      :notes
+    end
+  end
+
+  resources :notes do
+    resources :notes do
+      :notes
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

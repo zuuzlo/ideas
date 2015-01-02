@@ -1,0 +1,3 @@
+$('#task_modal').empty();
+$('#task_modal').append("<%= j (render partial: 'tasks/shared/task_modal', locals: { new_task: false, task: @task }) %>");
+$('#task_modal_new').modal('toggle');

@@ -1,0 +1,14 @@
+%h1.page-header
+  Note: #{@note.title}
+  %small= notable_link(@note.notable_type, @note.notable_id)
+%p
+  #{@note.text}
+  =link_to 'Add Note', new_polymorphic_path([@notable, @note]), remote: true
+- if @notable.notes.count > 0
+  %h3 Notes of #{@note.title}: 
+  .row
+    #notes.l12.s12
+      = render @notable.notes
+- else
+  %h3 No Notes to display.
+#modal

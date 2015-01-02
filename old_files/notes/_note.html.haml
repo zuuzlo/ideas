@@ -1,0 +1,15 @@
+.l3.s3{:id => "note_#{note.id}"}
+  .thumbnail
+    %h6
+      Note
+    %h3
+      = note.title
+    %p
+      = note.text
+    %p
+      = link_to "#", 'data-target' => "#note_modal_#{note.id}", 'data-toggle' => 'modal' do
+        %span.glyphicon.glyphicon-pencil
+      = link_to polymorphic_path([@notable, note]), remote: true, method: :delete do
+        %span.glyphicon.glyphicon-trash
+   
+= render partial: 'notes/shared/note_modal', locals: { note: note }

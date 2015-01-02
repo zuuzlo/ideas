@@ -1,0 +1,5 @@
+$('#notes').append("<%= j render partial: 'notes/note', locals: {note: @note } %>");
+if @note.id == Note.last.id
+  $('#note_modal_new').modal_success();
+else
+  $('#edit_note_#{@note.id}').modal_success();

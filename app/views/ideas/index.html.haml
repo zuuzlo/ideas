@@ -1,0 +1,4 @@
+%h1.page-header
+  Ideas
+= render partial: 'ideas/shared/ideas_table', locals:{ ideas: @ideas}
+= link_to "Add new idea", new_idea_path, remote: true

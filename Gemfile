@@ -21,7 +21,7 @@ gem 'friendly_id', '~> 5.0.0'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'bootstrap_form'
-
+gem 'high_voltage', '~> 2.2.1'
 
 gem 'fabrication'
 

@@ -1,0 +1,3 @@
+$('#task_modal_new').modal('toggle');
+$('.modal-backdrop.fade.in').remove();
+$('#task_<%= @task.id %>').replaceWith("<%= j (render partial: 'tasks/task', locals: {task: @task}) %>")
