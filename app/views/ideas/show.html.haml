@@ -28,7 +28,7 @@
 .panel.panel-default
   #headingTwo.panel-heading{role: "tab"}
     %h4.panel-title
-      = link_to "Idea Tasks", "#collapseTwo", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseTwo"
+      = link_to "#{@idea.name} Tasks", "#collapseTwo", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseTwo"
       = link_to new_polymorphic_path([@taskable, @task]), remote: true, class: 'pull-right' do
         %span.glyphicon.glyphicon-plus
         New Task

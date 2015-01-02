@@ -1,7 +1,7 @@
 class Idea < ActiveRecord::Base
   belongs_to :user
   has_many :notes, as: :notable, dependent: :destroy
-  has_many :tasks, as: :taskable, dependent: :destroy
+  has_many :tasks,-> { order('finish_date') }, as: :taskable, dependent: :destroy
   has_and_belongs_to_many :categories, -> { uniq }
   
   validates :name, presence: true
