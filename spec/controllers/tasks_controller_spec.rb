@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'time'
 
 RSpec.describe TasksController, :type => :controller do
   describe "GET new" do
@@ -164,6 +165,137 @@ RSpec.describe TasksController, :type => :controller do
       it "sets flash success" do
         expect(flash[:danger]).to be_present
       end
+    end
+  end
+
+  describe "DELETE destroy" do
+    let(:user1) { Fabricate(:user) }
+    let(:idea1) { Fabricate(:idea, user_id: user1.id) }
+    let(:task1) { Fabricate(:task, user_id: user1.id) }
+    let(:task2) { Fabricate(:task, user_id: user1.id) }
+
+    before do
+      idea1.tasks << task1
+      idea1.tasks << task2
+      sign_in user1
+      delete :destroy, id: task1.id, idea_id: idea1.id, format: 'js'
+    end
+
+    it "finds correct task to delete and sets @task" do
+      expect(assigns(:task)).to eq(task1)
+    end
+
+    it "loads notable parent of the note." do
+      expect(assigns(:taskable)).to eq(idea1)
+    end
+
+    it "sets flash success" do
+      expect(flash[:success]).to be_present
+    end
+
+    it "removes the record" do
+      expect(Task.all.count).to eq(1)
+    end
+
+    it "renders destroy" do
+      expect(response).to render_template("destroy")
+    end
+  end
+
+  describe "POST update_task" do
+    let(:user1) { Fabricate(:user) }
+    let(:idea1) { Fabricate(:idea, user_id: user1.id) }
+    let(:task1) { Fabricate(:task, user_id: user1.id, status: "Hold") }
+    let(:task2) { Fabricate(:task, user_id: user1.id) }
+
+    before do
+      idea1.tasks << task1
+      idea1.tasks << task2
+      sign_in user1
+    end
+    
+    context "valid input" do
+      context "task is complete" do
+        before do
+          post :update_task, id: task1.id, idea_id: idea1.id, percent_complete: 100, status: "Complete", format: 'js'
+        end
+        it "sets @task" do
+          expect(assigns(:task)).to eq(task1)
+        end
+
+        it "sets @taskable" do
+          expect(assigns(:taskable)).to eq(idea1)
+        end
+
+        it "updates task % complete" do
+          expect(Task.find_by_id(task1.id).percent_complete).to eq(100)
+        end
+
+        it "updates task status" do
+          expect(Task.find_by_id(task1.id).status).to eq("Complete")
+        end
+
+        it "updates completion_date if task is complete" do
+          expect(Task.find_by_id(task1.id).completion_date.to_s).to eq(Time.now.strftime "%F")
+        end
+
+        it "renders update_task" do
+          expect(response).to render_template :update_task
+        end
+
+        it "flash success should be present" do
+          expect(flash[:success]).to be_present
+        end
+      end
+
+      context "task is not complete" do
+        before do
+          post :update_task, id: task1.id, idea_id: idea1.id, percent_complete: 99, status: "Active", format: 'js'
+        end
+
+        it "sets percent complete" do
+          expect(Task.find_by_id(task1.id).percent_complete).to eq(99)
+        end
+
+        it "sets task status" do
+          expect(Task.find_by_id(task1.id).status).to eq("Active")
+        end
+
+        it "doesn't change completion_date" do
+          expect(Task.find_by_id(task1.id).completion_date).to be_nil
+        end
+
+        it "flash success should be present" do
+          expect(flash[:success]).to be_present
+        end
+      end
+    end
+
+    context "input not valid" do
+      before do
+          post :update_task, id: task1.id, idea_id: idea1.id, percent_complete: -1, status: "Active", format: 'js'
+      end
+
+      it "task is not updated" do
+        expect(Task.find_by_id(task1.id).percent_complete).to eq(25)
+      end
+
+      it "flash danger should be present" do
+          expect(flash[:danger]).to be_present
+      end
+    end
+  end
+
+  describe "POST more_less" do
+    let(:user1) { Fabricate(:user) }
+    let(:idea1) { Fabricate(:idea, user_id: user1.id) }
+    let(:task1) { Fabricate(:task, user_id: user1.id, status: "Hold") }
+    let(:task2) { Fabricate(:task, user_id: user1.id) }
+
+    before do
+      idea1.tasks << task1
+      idea1.tasks << task2
+      sign_in user1
     end
   end
 end

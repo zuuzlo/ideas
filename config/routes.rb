@@ -8,6 +8,17 @@ Rails.application.routes.draw do
 
     resources :tasks do
       :tasks
+      collection do
+        get 'tab_active'
+        get 'tab_hold'
+        get 'tab_complete'
+        get 'tab_all'
+      end
+
+      member do
+        post :update_task
+        get :more_less
+      end
     end
 
     member do

@@ -1,0 +1,7 @@
+$("tr[data-type='Active']").show("slow");
+$("tr[data-type='Hold']").show("slow");
+$("tr[data-type='Complete']").show("slow");
+$("li:has(a#tab_active_pill)").removeClass("active")
+$("li:has(a#tab_hold_pill)").removeClass("active")
+$("li:has(a#tab_complete_pill)").removeClass("active")
+$("li:has(a#tab_all_pill)").addClass("active")

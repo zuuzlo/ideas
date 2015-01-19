@@ -15,8 +15,8 @@
           <strong>Problem Solves:</strong> #{@idea.problem_solves}
         .s6.l6
           = bootstrap_form_tag url: update_status_idea_path(@idea), remote: true, layout: :inline do |f|
-            = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]], "#{@idea.status}"), { label: "Update Idea Status " }, { class: "selectpicker" }
-            =f.submit
+            = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]], "#{@idea.status}"), { label: "Update Idea Status" }
+            =f.submit "Update Status"
       .row
         .s6.l6
           <strong>Created:</strong> 
@@ -34,6 +34,7 @@
         New Task
   #collapseTwo.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingTwo" }
     .panel-body
+      = render partial: 'shared/task_tabs'
       = render partial: 'tasks/shared/task_table', locals: { tasks: @tasks }
 .panel.panel-default
   #headingThree.panel-heading{role: "tab"}
@@ -45,6 +46,6 @@
   #collapseThree.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingThree" }
     .panel-body
       #notes.l12.s12
-        = render @notable.notes 
+        = render partial: 'notes/note', collection: @notable.notes 
 #modal
 #task_modal

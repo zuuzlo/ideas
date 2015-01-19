@@ -50,10 +50,12 @@ RSpec.describe IdeasController, :type => :controller do
     end
     let!(:note1) { Fabricate(:note, user_id: user1.id) }
     let!(:note2) { Fabricate(:note, user_id: user1.id) }
+    let!(:task1) { Fabricate(:task, user_id: user1.id) }
+    let!(:task2) { Fabricate(:task, user_id: user1.id) }
     before do 
       sign_in user1
-      idea1.notes << note1
-      idea1.notes << note2
+      idea1.notes << [note1, note2]
+      idea1.tasks << [task1, task2]
       xhr :get, :show, id: idea1.id, format: 'html'
     end
     it "returns http success" do
@@ -84,7 +86,7 @@ RSpec.describe IdeasController, :type => :controller do
     end
 
     it "loads idea tasks into @tasks" do
-      pending "need to add test for tasks"
+      expect(assigns(:tasks).count).to eq(2)
     end
   end
 

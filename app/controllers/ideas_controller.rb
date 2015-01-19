@@ -52,7 +52,7 @@ class IdeasController < ApplicationController
       @idea.update(status: status)
       flash[:success] = "Updated idea status."
     end
-
+    @taskable = @idea
     @notable = @idea
     render :show
   end

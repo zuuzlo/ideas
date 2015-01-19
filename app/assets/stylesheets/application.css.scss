@@ -1,8 +1,4 @@
 
-
-
-$thumbnail-bg:                #fcf8e3;
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -52,4 +48,8 @@ $thumbnail-bg:                #fcf8e3;
 // Medium and large device columns (desktop and up)
 @media (min-width: $screen-desktop) {
   @include grid-shortcuts($prefix: 'l', $with-offsets: true);
+}
+
+td>.form-group {
+  margin-bottom: 0px !important;
 }

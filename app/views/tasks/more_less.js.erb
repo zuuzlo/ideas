@@ -1,0 +1,13 @@
+var l = $('#description_<%= @task.id %> a:contains("(more)")').length
+
+if(l > 0) { 
+  $('#description_<%= @task.id %>').replaceWith("<td id='description_<%= @task.id %>'>"
+    + "<%= @task.description %>" 
+    + "<%= escape_javascript link_to '(less)', more_less_idea_task_path(@taskable.id, @task.id), remote: 'true' %>"
+    + "</td>")
+}
+else {
+  $('#description_<%= @task.id %>').replaceWith("<td id='description_<%= @task.id %>'>"
+    + "<%= escape_javascript truncate( @task.description, length: 49, omission: ' '){link_to '(more)', more_less_idea_task_path(@taskable.id, @task.id), remote: true  } %>" 
+    + "</td>")
+}

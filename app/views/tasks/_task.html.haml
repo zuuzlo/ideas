@@ -1,14 +1,20 @@
-%tr{:id => "task_#{task.id}" }
-  %td
-    = task.name
-  %td
-    = task.description
-  %td
-    = task.percent_complete
-  %td
-    = task.status
-  %td
-    = l task.finish_date, format: :short if task.finish_date
-  %td
-    =link_to edit_polymorphic_path([@taskable, task]), remote: true do
-      %span.glyphicon.glyphicon-pencil
+%tr{:id => "task_#{task.id}", 'data-type' => "#{task.status}" }
+  = bootstrap_form_tag url: update_task_idea_task_path(@taskable.id,task.id), remote: true, layout: :inline do |f|
+    %td
+      = task.name
+    %td{:id => "description_#{task.id}"}
+      = truncate("#{task.description}", length: 49, omission: ' ') {link_to "(more)", more_less_idea_task_path(@taskable.id, task.id), remote: true  }
+    %td
+      = f.number_field :percent_complete, value: task.percent_complete, wrapper: { class: 'task_table'}, class: "input-sm", hide_label: true
+    %td
+      = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]], "#{task.status}"), {hide_label: true }, wrapper: { class: 'task_table'}, class: "input-sm"
+    %td
+      = f.submit wrapper: { class: 'task_table'}, class: "btn btn-default btn-sm"
+    %td
+      = f.date_field :finish_date, value: task.finish_date, class: 'form-control input-sm', hide_label: true
+      =# l task.finish_date, format: :short if task.finish_date
+    %td
+      =link_to edit_polymorphic_path([@taskable, task]), remote: true do
+        %span.glyphicon.glyphicon-pencil
+      = link_to polymorphic_path([@taskable, task]), remote: true, method: :delete do
+        %span.glyphicon.glyphicon-trash

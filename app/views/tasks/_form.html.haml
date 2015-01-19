@@ -5,7 +5,7 @@
   = f.text_field :name
   = f.text_area :description
   = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]]), { class: "selectpicker" }
-  = f.number_field :percent_complete
+  = f.number_field :percent_complete, value: 0
   = f.date_field :start_date, class: 'form-control'
   = f.date_field :finish_date, class: 'form-control'
   = f.date_field :completion_date, class: 'form-control'
