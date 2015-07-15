@@ -6,8 +6,13 @@ Rails.application.routes.draw do
       :notes
     end
 
+    resources :idea_links do
+      :idea_links
+    end
+
     resources :tasks do
       :tasks
+=begin
       collection do
         get 'tab_active'
         get 'tab_hold'
@@ -19,11 +24,41 @@ Rails.application.routes.draw do
         post :update_task
         get :more_less
       end
+=end
     end
 
     member do
       post :update_status
       post :remove_category
+    end
+  end
+
+  resources :tasks do
+    
+    collection do
+      get 'tab_active'
+      get 'tab_hold'
+      get 'tab_complete'
+      get 'tab_all'
+    end
+
+    member do
+      post :update_task
+      get :more_less
+      get :show_children
+      get :move_up
+    end
+
+    resources :tasks do
+      :tasks
+    end
+
+    resources :notes do
+      :notes
+    end
+
+    resources :idea_links do
+      :idea_links
     end
   end
 

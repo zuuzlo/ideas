@@ -14,7 +14,7 @@
           %span.sr-only
             Close
       .modal-body
-        = render partial: 'tasks/form', locals: { modal: true, task: task }
+        = render partial: 'tasks/form', locals: { modal: true, parent: @taskable, task: task }
       .modal-footer
         %button.close{"type"=>"button", "data-dismiss"=>"modal"}
           %span{"aria-hidden" => "true"}

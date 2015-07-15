@@ -25,27 +25,4 @@
           <strong>Belongs To Categories:</strong> 
           #idea_categories
             = render partial: "categories/shared/categories_link_to", locals:{ categories: @idea.categories.uniq, idea: @idea }
-.panel.panel-default
-  #headingTwo.panel-heading{role: "tab"}
-    %h4.panel-title
-      = link_to "#{@idea.name} Tasks", "#collapseTwo", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseTwo"
-      = link_to new_polymorphic_path([@taskable, @task]), remote: true, class: 'pull-right' do
-        %span.glyphicon.glyphicon-plus
-        New Task
-  #collapseTwo.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingTwo" }
-    .panel-body
-      = render partial: 'shared/task_tabs'
-      = render partial: 'tasks/shared/task_table', locals: { tasks: @tasks }
-.panel.panel-default
-  #headingThree.panel-heading{role: "tab"}
-    %h4.panel-title
-      = link_to "#{@notable.name} Idea Notes", "#collapseThree", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseThree"
-      = link_to new_polymorphic_path([@notable, @note]), remote: true, class: 'pull-right' do
-        %span.glyphicon.glyphicon-plus
-        New Note
-  #collapseThree.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingThree" }
-    .panel-body
-      #notes.l12.s12
-        = render partial: 'notes/note', collection: @notable.notes 
-#modal
-#task_modal
+= render partial: "shared/children", locals: { parent: @idea }

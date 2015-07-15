@@ -52,10 +52,13 @@ RSpec.describe IdeasController, :type => :controller do
     let!(:note2) { Fabricate(:note, user_id: user1.id) }
     let!(:task1) { Fabricate(:task, user_id: user1.id) }
     let!(:task2) { Fabricate(:task, user_id: user1.id) }
+    let!(:idea_link1) { Fabricate(:idea_link, user_id: user1.id) }
+    let!(:idea_link2) { Fabricate(:idea_link, user_id: user1.id) }
     before do 
       sign_in user1
       idea1.notes << [note1, note2]
       idea1.tasks << [task1, task2]
+      idea1.idea_links << [idea_link1, idea_link2]
       xhr :get, :show, id: idea1.id, format: 'html'
     end
     it "returns http success" do
@@ -66,27 +69,27 @@ RSpec.describe IdeasController, :type => :controller do
       expect(assigns(:idea)).to eq(idea1)
     end
     it "sets @notes" do
-      expect(assigns(:idea).notes).to eq([note2, note1])
+      expect(assigns(:idea).notes).to match_array([note2, note1])
     end
 
     it "sets @note" do
       expect(assigns(:note)).to be_a Note
     end
 
-    it "sets @note user_id to current user" do
-      expect(assigns(:note).user_id).to eq(user1.id)
-    end
-
-    it "sets @notable to @idea" do
-      expect(assigns(:notable)).to eq(idea1)
-    end
-
-    it "sets @taskable to @idea" do
-      expect(assigns(:taskable)).to eq(idea1)
-    end
-
     it "loads idea tasks into @tasks" do
       expect(assigns(:tasks).count).to eq(2)
+    end
+
+    it "sets @task" do
+      expect(assigns(:task)).to be_a Task
+    end
+
+    it "sets @idea_link" do
+      expect(assigns(:idea_link)).to be_a IdeaLink
+    end
+
+    it "loads idea idea_links into @idea_link" do
+      expect(assigns(:idea_links)).to match_array([idea_link1, idea_link2])
     end
   end
 
@@ -332,6 +335,40 @@ RSpec.describe IdeasController, :type => :controller do
 
     it "should flash success" do
       expect(flash[:success]).to be_present
+    end
+  end
+
+  describe "DELETE destroy" do
+    let!(:user1) { Fabricate(:user) }
+    (1..3).each do |i|
+        let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
+    end
+    let!(:note1) { Fabricate(:note, user_id: user1.id) }
+    let!(:note2) { Fabricate(:note, user_id: user1.id) }
+    let!(:task1) { Fabricate(:task, user_id: user1.id) }
+    let!(:task2) { Fabricate(:task, user_id: user1.id) }
+    
+    before do 
+      sign_in user1
+      idea1.notes << [note1, note2]
+      idea1.tasks << [task1, task2]
+      delete :destroy, id: idea1.id, format: 'js'
+    end
+
+    it "finds correct idea and set @idea" do
+      expect(assigns(:idea)).to eq(idea1)
+    end
+
+    it "should remove idea" do
+      expect(Idea.all.count).to eq(2)
+    end
+
+    it "sets flash success" do
+      expect(flash[:success]).to be_present
+    end
+
+    it "renders destroy" do
+      expect(response).to render_template("destroy")
     end
   end
 end

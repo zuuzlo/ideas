@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.0.0'
 gem 'rails', '4.1.8'
 gem 'pg'
 #gem 'sass-rails', '~> 4.0.3'
@@ -24,9 +24,9 @@ gem 'bootstrap_form'
 gem 'high_voltage', '~> 2.2.1'
 
 gem 'fabrication'
+gem 'acts_as_list'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -38,6 +38,15 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'pry-nav'
+end
+
+group :development do
+  gem 'letter_opener'
+  gem 'capistrano', '~> 3.3.5'
+  gem 'capistrano-rails', '~> 1.1.2'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv', "~> 2.0.3"
+  gem 'capistrano-cookbook', require: false
 end
 
 group :test do

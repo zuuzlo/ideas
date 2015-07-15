@@ -1,0 +1,41 @@
+.panel.panel-default
+  #headingTwo.panel-heading{role: "tab"}
+    %h4.panel-title
+      = link_to "#collapseTwo", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseTwo" do
+        %span.glyphicon.glyphicon-tasks
+        #{parent.name} - Tasks
+      = link_to new_polymorphic_path([parent, @task]), remote: true, class: 'pull-right' do
+        %span.glyphicon.glyphicon-plus
+        New Task
+  #collapseTwo.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingTwo" }
+    .panel-body
+      = render partial: 'shared/task_tabs'
+      = render partial: 'tasks/shared/task_table', locals: { parent: parent, tasks: @tasks }
+.panel.panel-default
+  #headingThree.panel-heading{role: "tab"}
+    %h4.panel-title
+      = link_to "#collapseThree", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseThree" do
+        %span.glyphicon.glyphicon-file
+        #{parent.name} - Notes
+      = link_to new_polymorphic_path([parent, @note]), remote: true, class: 'pull-right' do
+        %span.glyphicon.glyphicon-plus
+        New Note
+  #collapseThree.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingThree" }
+    .panel-body
+      #notes.l12.s12
+        = render partial: 'notes/note', collection: parent.notes, locals: { parent: parent }
+.panel.panel-default
+  #headingFour.panel-heading{role: "tab"}
+    %h4.panel-title
+      = link_to "#collapseFour", 'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseFour" do
+        %span.glyphicon.glyphicon-link
+        #{parent.name} - Links
+      = link_to new_polymorphic_path([parent, @idea_link]), remote: true, class: 'pull-right' do
+        %span.glyphicon.glyphicon-plus
+        New Link
+  #collapseFour.panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby'=>"headingFour" }
+    .panel-body
+      = render partial: 'idea_links/shared/idea_link_table', locals: { parent: parent, idea_links: @idea_links }
+#modal
+#task_modal
+#idea_link_modal

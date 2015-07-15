@@ -1,11 +1,9 @@
 .l3.s3{:id => "note_#{note.id}"}
   .alert.alert-info
     %h5
-      .l3.s3.text-left
-        <strong>Note</strong>
-      .l9.s9.text-right
-        = l note.created_at, format: :short
-    %h3
+      = l note.created_at, format: :short
+    %h4
+      <strong>Note: </strong>
       = note.title
     %p
       = note.text

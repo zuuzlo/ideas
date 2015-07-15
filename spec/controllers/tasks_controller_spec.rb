@@ -6,9 +6,10 @@ RSpec.describe TasksController, :type => :controller do
     context "unauthenticated user" do
       let(:user1) { Fabricate(:user) }
       let(:idea1) { Fabricate(:idea, user_id: user1.id) }
+      let(:task1) { Fabricate(:task, user_id: user1.id) }
       
       it_behaves_like "require_sign_in" do
-        let(:action) { xhr :get, :new, idea_id: idea1.id, format: 'js' }
+        let(:action) { get :new, idea_id: idea1.id }
       end
     end
 
@@ -41,7 +42,7 @@ RSpec.describe TasksController, :type => :controller do
     let(:user1) { Fabricate(:user) }
     let(:idea1) { Fabricate(:idea, user_id: user1.id) }
     before { sign_in user1 }
-    context "good data" do
+    context "valid data" do
       before do
         post :create, task: { name: "New Task", description: 'new task description', status: "Active", assigned_by: user1.id, assigned_to: user1.id, user_id: user1.id, percent_complete: 10, start_date: Time.now, finish_date: Time.now + 5.days, completion_date: Time.now + 10.days }, idea_id: idea1.id, format: 'js'
       end
@@ -62,7 +63,7 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
 
-    context "bad data" do
+    context "invalid data" do
       before do
         post :create, task: { name: nil, description: 'new task description', status: "Active", assigned_by: user1.id, assigned_to: user1.id, user_id: user1.id, percent_complete: 10, start_date: Time.now, finish_date: Time.now + 5.days, completion_date: Time.now + 10.days }, idea_id: idea1.id, format: 'js'
       end
@@ -175,8 +176,7 @@ RSpec.describe TasksController, :type => :controller do
     let(:task2) { Fabricate(:task, user_id: user1.id) }
 
     before do
-      idea1.tasks << task1
-      idea1.tasks << task2
+      idea1.tasks << [task1, task2]
       sign_in user1
       delete :destroy, id: task1.id, idea_id: idea1.id, format: 'js'
     end
@@ -286,7 +286,7 @@ RSpec.describe TasksController, :type => :controller do
     end
   end
 
-  describe "POST more_less" do
+  describe "GET more_less" do
     let(:user1) { Fabricate(:user) }
     let(:idea1) { Fabricate(:idea, user_id: user1.id) }
     let(:task1) { Fabricate(:task, user_id: user1.id, status: "Hold") }
@@ -296,6 +296,124 @@ RSpec.describe TasksController, :type => :controller do
       idea1.tasks << task1
       idea1.tasks << task2
       sign_in user1
+      xhr :get, :more_less, id: task1.id, idea_id: idea1.id, format: 'js'
+    end
+
+    it "sets @task and finds proper task" do
+      expect(assigns(:task)).to eq(task1)
+    end
+
+    it "sets @taskable to idea1" do
+      expect(assigns(:taskable)).to eq(idea1)
+    end
+
+    it "renders more_less" do
+      expect(response).to render_template :more_less
+    end
+  end
+
+  describe "GET show" do
+    let(:user1) { Fabricate(:user) }
+    let(:taskp) { Fabricate(:task, user_id: user1.id) }
+    (1..3).each do |i|
+      let("task#{i}".to_sym) { Fabricate(:task, name: "task#{i}", user_id: user1.id) }
+      let("note#{i}".to_sym) { Fabricate(:note, title: "note#{i}", user_id: user1.id) }
+      let("idea_link#{i}".to_sym) { Fabricate(:idea_link, name: "Idea Link#{i}", user_id: user1.id) }
+    end
+
+    before do
+      taskp.tasks << [task1, task2, task3]
+      taskp.notes << [note1, note2, note3]
+      taskp.idea_links << [idea_link1, idea_link2, idea_link3]
+      sign_in user1
+      xhr :get, :show, id: taskp.id, format: 'html'
+    end
+
+    it "sets @parent to show task" do
+      expect(assigns(:parent)).to eq(taskp)
+    end
+
+    it "loads children tasks into @tasks" do
+      expect(assigns(:tasks)).to match_array([task1, task2, task3])
+    end
+
+    it "loads children notes into @notes" do
+      expect(assigns(:notes)).to match_array([note1, note2, note3])
+    end
+
+    it "loads children idea_links into @idea_links" do
+      expect(assigns(:idea_links)).to match_array([idea_link1, idea_link2, idea_link3])
+    end
+    it "renders show template" do
+      expect(response).to render_template(:show)
+    end
+  end
+
+  describe "GET show_children" do
+    let(:user1) { Fabricate(:user) }
+    let(:idea1) { Fabricate(:idea, user_id: user1.id) }
+    let(:task1) { Fabricate(:task, user_id: user1.id, status: "Hold") }
+    let(:task2) { Fabricate(:task, user_id: user1.id) }
+
+    before do
+      idea1.tasks << task1
+      idea1.tasks << task2
+      sign_in user1
+      xhr :get, :show_children, id: task1.id, format: 'js'
+    end
+
+    it "sets @task and finds proper task" do
+      expect(assigns(:task)).to eq(task1)
+    end
+
+    it "renders more_less" do
+      expect(response).to render_template :show_children
+    end
+  end
+
+  describe "Get move_up" do
+    let(:user1) { Fabricate(:user) }
+    let(:taskp) { Fabricate(:task, user_id: user1.id) }
+    (1..9).each do |i|
+      status = ["Active", "Hold"]
+      si = i%2
+      let("task#{i}".to_sym) { Fabricate(:task, name: "task#{i}", status: status[si], user_id: user1.id) }
+    end
+
+    before do
+      [task1, task2, task3, task4, task5, task6, task7, task8, task9].each_with_index do |task, i|
+        taskp.tasks << task
+        task.insert_at(i)
+      end
+
+      sign_in user1
+    end
+
+    context "All tab" do
+      context "task is any where but top" do
+        before { xhr :get, :move_up, id: task2.id, format: 'js' }
+        
+        it "move task2 to postion 1" do
+          assigns(:task).move_higher
+          expect(assigns(:task).position).to eq(0)
+        end
+      end
+
+      context "task is top" do
+        before { xhr :get, :move_up, id: task1.id, format: 'js' }
+        
+        it "doesn't move top task" do
+          expect(assigns(:task).position).to eq(0)
+        end
+      end
+    end
+
+    context "task is ordered in Hold status" do
+      before { xhr :get, :move_up, id: task3.id, format: 'js' }
+
+      it "sets @order_diff to 2" do
+        expect(assigns(:order_diff)).to eq(2)
+      end
     end
   end
 end

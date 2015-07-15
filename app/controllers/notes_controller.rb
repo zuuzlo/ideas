@@ -64,7 +64,7 @@ class NotesController < ApplicationController
   private
 
     def find_note
-      @note = @notable.notes.friendly.find(params[:id])
+      @note = Note.friendly.find(params[:id])
     end
 
     def load_notable
@@ -75,6 +75,8 @@ class NotesController < ApplicationController
         @notable = Note.friendly.find(params[:note_id])
       elsif params[:idea_id]
         @notable = Idea.friendly.find(params[:idea_id])
+      elsif params[:task_id]
+        @notable = Task.friendly.find(params[:task_id])  
       end
     end
 

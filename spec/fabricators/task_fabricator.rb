@@ -1,5 +1,5 @@
 Fabricator(:task) do
-  name { Faker::Lorem.word }
+  name { Faker::Lorem.sentence(3) }
   description { Faker::Lorem.sentence( word_count = 5 ) }
   status { %w(Hold Active Complete).sample }
   percent_complete 25

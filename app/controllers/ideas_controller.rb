@@ -1,7 +1,8 @@
 class IdeasController < ApplicationController
+  include LoadChildren
   before_action :authenticate_user!
-  before_action :all_ideas, only: [:index, :create, :update, :destroy]
-  before_action :set_idea, only: [:edit, :update, :show, :update_status, :remove_category]
+  before_action :all_ideas, only: [:index, :create, :update]
+  before_action :set_idea, only: [:destroy, :edit, :update, :show, :update_status, :remove_category]
   respond_to :js, :html
 
   def new
@@ -9,13 +10,19 @@ class IdeasController < ApplicationController
   end
 
   def show
+    load_children(@idea)
+=begin
     @notes = @idea.notes
     @tasks = @idea.tasks
+    @idea_links = @idea.idea_links
     @note = Note.new
     @task = Task.new
-    @note.user_id = current_user.id
+    @idea_link = IdeaLink.new
+    #@note.user_id = current_user.id
     @notable = @idea
     @taskable = @idea
+    @idea_linkable = @idea
+=end
   end
 
   def create
@@ -44,6 +51,14 @@ class IdeasController < ApplicationController
     end
   end
 
+  def destroy
+    if @idea.destroy
+      flash[:success] = "Idea removed."
+    else
+      flash[:danger] = "Failed to remove idea."
+    end  
+  end
+
   def update_status
     status = params[:status]
     old_status = @idea.status
@@ -54,6 +69,7 @@ class IdeasController < ApplicationController
     end
     @taskable = @idea
     @notable = @idea
+    @idea_linkable = @idea
     render :show
   end
 

@@ -1,20 +1,39 @@
-%tr{:id => "task_#{task.id}", 'data-type' => "#{task.status}" }
-  = bootstrap_form_tag url: update_task_idea_task_path(@taskable.id,task.id), remote: true, layout: :inline do |f|
-    %td
-      = task.name
-    %td{:id => "description_#{task.id}"}
-      = truncate("#{task.description}", length: 49, omission: ' ') {link_to "(more)", more_less_idea_task_path(@taskable.id, task.id), remote: true  }
-    %td
-      = f.number_field :percent_complete, value: task.percent_complete, wrapper: { class: 'task_table'}, class: "input-sm", hide_label: true
-    %td
+.row.task-grid{:id => "task_#{task.id}", 'data-type' => "#{task.status}" }
+  = bootstrap_form_tag url: update_task_task_path(task.id), remote: true, layout: :inline do |f|
+    .s2.l2
+      .s1.l1
+        - if task.tasks.count > 0
+          = link_to show_children_task_path(task.id), remote: true do
+            %span.glyphicon.glyphicon-plus-sign.glyphicon-center{:id => "show_children_task_icon_#{task.id}"}
+        - if child
+          %span.glyphicon.glyphicon-minus.glyphicon-center
+      .s1.l1.up-down
+        = link_to move_up_task_path(task.id), remote: true do
+          %span.glyphicon.glyphicon-collapse-up
+        = link_to move_up_task_path(task.id), remote: true do
+          %span.glyphicon.glyphicon-collapse-down
+      .s10.l10
+        =task.position
+        = task.name
+    .s4.l4{:id => "description_#{task.id}"}
+      = truncate("#{task.description}", length: 45, omission: ' ') {link_to "(more)", more_less_task_path(task.id), remote: true  }
+    .s5.l5
+      
+      = f.number_field :percent_complete, value: task.percent_complete,style: 'width:65px', label: "100%++++", class: "input-sm", hide_label: true
+       
       = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]], "#{task.status}"), {hide_label: true }, wrapper: { class: 'task_table'}, class: "input-sm"
-    %td
+    
       = f.submit wrapper: { class: 'task_table'}, class: "btn btn-default btn-sm"
-    %td
+    
       = f.date_field :finish_date, value: task.finish_date, class: 'form-control input-sm', hide_label: true
       =# l task.finish_date, format: :short if task.finish_date
-    %td
-      =link_to edit_polymorphic_path([@taskable, task]), remote: true do
+    .s1.l1
+      = link_to task_path(task) do
+        %span.glyphicon.glyphicon-eye-open
+      =link_to edit_polymorphic_path([parent, task]), remote: true do
         %span.glyphicon.glyphicon-pencil
-      = link_to polymorphic_path([@taskable, task]), remote: true, method: :delete do
+      = link_to polymorphic_path([parent, task]), remote: true, method: :delete do
         %span.glyphicon.glyphicon-trash
+- if task.tasks.count > 0
+  %div{:id => "task_#{task.id}_children", :style => "display:none"}
+    = render partial: "tasks/task", collection: task.tasks, locals: { parent: task, child: true }

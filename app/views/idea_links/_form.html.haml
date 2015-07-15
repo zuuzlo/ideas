@@ -1,0 +1,8 @@
+- modal ||= false
+- remote = modal ? true : false
+- data_model = idea_link.id ? "edit_task_#{idea_link.id}" : "new_idea_link"
+= bootstrap_form_for([@idea_linkable, idea_link], remote: remote, html: { role: :form, 'data-model' => "#{data_model}" }) do |f|
+  = f.text_field :name
+  = f.url_field :link_url
+  = f.hidden_field :user_id, value: current_user.id
+  = f.button class: "btn btn-success"

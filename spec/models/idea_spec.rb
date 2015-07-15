@@ -4,6 +4,7 @@ RSpec.describe Idea, :type => :model do
   it { should belong_to(:user) }
   it { should have_many(:notes) }
   it { should have_many(:tasks) }
+  it { should have_many(:idea_links) }
   it { should validate_presence_of(:name) }
   it { should have_and_belong_to_many(:categories) }
   it { should validate_uniqueness_of(:name).case_insensitive.scoped_to(:user_id) }

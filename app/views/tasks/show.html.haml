@@ -1,0 +1,11 @@
+%h1.page-header
+  Task: #{@parent.name}
+  %small= taskable_link(@parent.taskable_type, @parent.taskable_id)
+.panel.panel-default
+  #headingOne.panel-heading{role: "tab"}
+    %h4.panel-title
+      = link_to "#{@parent.name} details", "#collapseOne",'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseOne"
+  #collapseOne.panel-collapse.collapse.in{ role: "tabpanel", 'aria-labelledby'=>"headingOne" }
+    .panel-body
+      = render partial: "form", locals: { task: @parent, parent: @parent.taskable_type.classify.constantize.find(@parent.taskable_id) }
+= render partial: "shared/children", locals: { parent: @parent }

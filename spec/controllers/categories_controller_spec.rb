@@ -186,7 +186,7 @@ RSpec.describe CategoriesController, :type => :controller do
     end
     
     it "sets @notes" do
-      expect(assigns(:category).notes).to eq([note2, note1])
+      expect(assigns(:category).notes).to match_array([note2, note1])
     end
 
     it "sets @note" do
@@ -202,7 +202,7 @@ RSpec.describe CategoriesController, :type => :controller do
     end
 
     it "sets @ideas" do
-      expect(assigns(:ideas)).to eq([idea1, idea2])
+      expect(assigns(:ideas)).to match_array([idea1, idea2])
     end
   end
 

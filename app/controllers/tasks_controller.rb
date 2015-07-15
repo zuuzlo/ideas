@@ -1,11 +1,19 @@
 class TasksController < ApplicationController
+  include LoadChildren
   before_action :authenticate_user!
   respond_to :js, :html
   before_action :load_taskable, only: [:new, :create, :edit, :update, :destroy, :update_task, :more_less ]
-  before_action :set_task, only: [:destroy, :edit, :update, :update_task, :more_less]
+  before_action :set_task, only: [:move_up, :show_children, :destroy, :edit, :update, :update_task, :more_less]
+  
   def new
     @task = Task.new 
     @task.user_id = current_user.id
+  end
+
+  def show
+
+    @parent = Task.friendly.find(params[:id])
+    load_children(@parent)
   end
 
   def create
@@ -60,6 +68,32 @@ class TasksController < ApplicationController
 
   end
 
+  def show_children
+
+  end
+
+  def move_up
+    @status = @task.status
+    taskable = @task.taskable_type.constantize.friendly.find(@task.taskable_id)
+    active_order = taskable.tasks.where(["status = :status", { status: @status } ])
+    order = []
+    
+    active_order.each do |task|
+      order << task.position
+    end
+
+    place = order.index(@task.position)
+    @order_diff = (order[place] - order[place - 1]) unless place == 0
+    
+    if @task.higher_item.nil? || @order_diff.nil?
+      require 'pry'; binding.pry
+      render :nothing => true
+    else
+      #@above_task = @task.higher_item
+      #@task.move_higher
+    end
+  end
+
   private
     def set_task
       @task = Task.friendly.find(params[:id])
@@ -69,11 +103,13 @@ class TasksController < ApplicationController
 
       if params[:idea_id]
         @taskable = Idea.friendly.find(params[:idea_id])
+      elsif params[:task_id]
+        @taskable = Task.friendly.find(params[:task_id])
       end
     end
 
     def task_params
-      params.require(:task).permit(:id, :name, :description, :assigned_by, :assigned_to, :user_id, :percent_complete, :start_date, :finish_date, :completion_date, :status, :slug, :idea_id)
+      params.require(:task).permit(:id, :name, :description, :assigned_by, :assigned_to, :user_id, :percent_complete, :start_date, :finish_date, :completion_date, :status, :slug, :idea_id, :task_id)
     end
 
 end

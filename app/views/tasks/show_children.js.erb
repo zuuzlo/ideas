@@ -1,0 +1,10 @@
+$("#task_<%= @task.id %>_children").toggle();
+
+if($("#show_children_task_icon_<%= @task.id %>").hasClass("glyphicon-plus-sign")) {
+  $("#show_children_task_icon_<%= @task.id %>").removeClass("glyphicon-plus-sign");
+  $("#show_children_task_icon_<%= @task.id %>").addClass("glyphicon-minus-sign");
+  }
+else {
+  $("#show_children_task_icon_<%= @task.id %>").addClass("glyphicon-plus-sign");
+  $("#show_children_task_icon_<%= @task.id %>").removeClass("glyphicon-minus-sign");
+}

@@ -1,17 +1,19 @@
-%table.table.table-condensed
-  %thead
-    %tr
-      %th(width="20%")
-        Task Name
-      %th(width="40%")
-        Task Description
-      %th(width="5%")
-        \% Complete
-      %th(width="15%")
-        Status
-      %th(width="5%")
-      %th(width="10%")
-        Due Date
-      %th(width="5%")   
-  %tbody#tasks
-    = render partial: "tasks/task", collection: tasks
+%h4
+  Task Overall Progress
+.progress
+  .progress-bar{ role: "progressbar", 'aria-valuenow' => "#{tasks_percent_complete_total(tasks)}", 'aria-valuemin' => "0", 'aria-valuemax' => "100", style: "width: #{tasks_percent_complete_total(tasks)}%"}
+    #{tasks_percent_complete_total(tasks)}%
+.row.task-grid-header
+  .s2.l2
+    %strong Task Name
+  .s4.l4
+    %strong Task Description
+  .s1.l1
+    %strong %Complete
+  .s2.l2
+    %strong Status
+  .s1.l1
+    %strong Due Date
+  .s1.l1
+#tasks
+  = render partial: "tasks/task", collection: tasks, locals: { parent: parent, child: false }

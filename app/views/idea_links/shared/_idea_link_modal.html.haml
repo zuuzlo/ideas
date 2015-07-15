@@ -1,0 +1,23 @@
+- new_idea_link ||= false
+- id = new_idea_link ? "new" : idea_link.id
+.modal.fade{ "id" => "idea_link_modal_new","tabindex"=>"-1", "role" => "dialog", "aria-labelledby" => "mySmallModalLabel", "aria-hidden" => "true" }
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        - if id == "new"
+          Create New Link
+        - else
+          Edit Link
+        %button.close{"type"=>"button", "data-dismiss"=>"modal"}
+          %span{"aria-hidden" => "true"}
+            %span.glyphicon.glyphicon-remove-circle
+          %span.sr-only
+            Close
+      .modal-body
+        = render partial: 'idea_links/form', locals: { modal: true, idea_link: idea_link }
+      .modal-footer
+        %button.close{"type"=>"button", "data-dismiss"=>"modal"}
+          %span{"aria-hidden" => "true"}
+            %span.glyphicon.glyphicon-remove-circle
+          %span.sr-only
+            Close

@@ -1,0 +1,3 @@
+$('#idea_link_modal').empty();
+$('#idea_link_modal').append("<%= j (render partial: 'idea_links/shared/idea_link_modal', locals: { new_idea_link: false, idea_link: @idea_link }) %>");
+$('#idea_link_modal_new').modal('toggle');

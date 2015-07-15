@@ -1,10 +1,10 @@
-%ul.nav.nav-pills
+%ul#task_tabs.nav.nav-pills
   %li.active
-    = link_to "All", tab_all_idea_tasks_path(@idea.id), method: 'get', remote: true, id: 'tab_all_pill', :rel => "nofollow"
+    = link_to "All", tab_all_tasks_path, method: 'get', remote: true, id: 'tab_all_pill', :rel => "nofollow"
   %li
-    = link_to "Active", tab_active_idea_tasks_path(@idea.id), method: 'get', remote: true, id: 'tab_active_pill', :rel => "nofollow"
+    = link_to "Active", tab_active_tasks_path, method: 'get', remote: true, id: 'tab_active_pill', :rel => "nofollow"
   %li
-    = link_to "Hold", tab_hold_idea_tasks_path(@idea.id), method: 'get', remote: true, id: 'tab_hold_pill', :rel => "nofollow"
+    = link_to "Hold", tab_hold_tasks_path, method: 'get', remote: true, id: 'tab_hold_pill', :rel => "nofollow"
   %li
-    = link_to "Complete", tab_complete_idea_tasks_path(@idea.id), method: 'get', remote: true, id: 'tab_complete_pill', :rel => "nofollow"
+    = link_to "Complete", tab_complete_tasks_path, method: 'get', remote: true, id: 'tab_complete_pill', :rel => "nofollow"
   

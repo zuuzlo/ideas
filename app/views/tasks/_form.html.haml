@@ -1,11 +1,11 @@
 - modal ||= false
 - remote = modal ? true : false
 - data_model = task.id ? "edit_task_#{task.id}" : "new_task"
-= bootstrap_form_for([@taskable, task], remote: remote, html: { role: :form, 'data-model' => "#{data_model}" }) do |f|
+= bootstrap_form_for([parent, task], layout: :inline, remote: remote, html: { role: :form, 'data-model' => "#{data_model}" }) do |f|
   = f.text_field :name
   = f.text_area :description
   = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]]), { class: "selectpicker" }
-  = f.number_field :percent_complete, value: 0
+  = f.number_field :percent_complete
   = f.date_field :start_date, class: 'form-control'
   = f.date_field :finish_date, class: 'form-control'
   = f.date_field :completion_date, class: 'form-control'
