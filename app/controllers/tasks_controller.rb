@@ -11,7 +11,6 @@ class TasksController < ApplicationController
   end
 
   def show
-
     @parent = Task.friendly.find(params[:id])
     load_children(@parent)
   end
