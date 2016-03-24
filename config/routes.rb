@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  
   devise_for :users, :path => "accounts"
   #root to: 'devise/sessions#new'
+  
+  mount Sidekiq::Web, :at => '/sidekiq'
+
   resources :ideas do
     resources :notes do
       :notes
@@ -47,6 +52,7 @@ Rails.application.routes.draw do
       get :more_less
       get :show_children
       get :move_up
+      get :move_down
     end
 
     resources :tasks do
@@ -72,6 +78,19 @@ Rails.application.routes.draw do
     resources :notes do
       :notes
     end
+  end
+
+  resources :jots do
+    member do
+      get :move_up
+      get :move_down
+      get :to_new_idea
+      post :to_new_task
+    end
+  end
+
+  resources :tasks do
+    :tasks
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

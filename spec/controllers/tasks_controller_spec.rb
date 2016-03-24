@@ -371,48 +371,278 @@ RSpec.describe TasksController, :type => :controller do
     end
   end
 
-  describe "Get move_up" do
+  describe "GET move_up" do
     let(:user1) { Fabricate(:user) }
-    let(:taskp) { Fabricate(:task, user_id: user1.id) }
-    (1..9).each do |i|
-      status = ["Active", "Hold"]
-      si = i%2
-      let("task#{i}".to_sym) { Fabricate(:task, name: "task#{i}", status: status[si], user_id: user1.id) }
-    end
-
-    before do
-      [task1, task2, task3, task4, task5, task6, task7, task8, task9].each_with_index do |task, i|
-        taskp.tasks << task
-        task.insert_at(i)
+    let!(:taskp) { Fabricate(:task, user_id: user1.id) }
+    
+    before(:example) do
+      (1..6).each do |i|
+        status = ["Active", "Hold"]
+        si = i%2
+        Fabricate(:task, name: "task#{i}", status: status[si], user_id: user1.id)
+        taskp.tasks << Task.last
       end
 
       sign_in user1
     end
 
     context "All tab" do
+
       context "task is any where but top" do
-        before { xhr :get, :move_up, id: task2.id, format: 'js' }
+        before(:example) do
+          xhr :get, :tab_all, format: 'js'
+          xhr :get, :move_up, id: Task.where(name: "task2").first.id, format: 'js'
+        end
         
+        it "finds correct task and set @task" do
+          expect(assigns(:task).name).to eq("task2")
+        end
+
         it "move task2 to postion 1" do
-          assigns(:task).move_higher
-          expect(assigns(:task).position).to eq(0)
+          expect(assigns(:task).first?).to be true
+        end
+
+        it "at itentifies next" do
+          expect(assigns(:next).name).to eq("task1")
+        end
+
+        it "moved task1 down to spot 2" do
+          expect(Task.where(name: "task1").first.position).to eq(2)
+        end
+
+        it "flash success" do
+          expect(flash[:success]).to be_present
+        end
+
+        it "@tab is 'All'" do
+          expect(TasksController.class_variable_get(:@@tab)).to eq("All")
+        end
+
+        it "assign @above_task to eq @task" do
+          expect(assigns(:above_task).name).to eq("task2")
         end
       end
 
       context "task is top" do
-        before { xhr :get, :move_up, id: task1.id, format: 'js' }
         
+        before(:example) do
+          xhr :get, :tab_all, format: 'js'
+          xhr :get, :move_up, id: Task.where(name: "task1").first.id, format: 'js'
+        end
+
+        it "finds correct task and set @task" do
+          expect(assigns(:task).name).to eq("task1")
+        end
+
         it "doesn't move top task" do
-          expect(assigns(:task).position).to eq(0)
+          expect(assigns(:task).first?).to be true
+        end
+
+        it "flash danger" do
+          expect(flash[:danger]).to be_present
+        end
+        
+        it "renders nothing" do
+          expect(response.body).to be_blank
         end
       end
     end
 
-    context "task is ordered in Hold status" do
-      before { xhr :get, :move_up, id: task3.id, format: 'js' }
+    context "Hold tab" do
+      context "task is ordered in middle atleast 1 away from next" do
+        before(:example) do
+          xhr :get, :tab_hold, format: 'js'
+          xhr :get, :move_up, id: Task.where(name: "task5").first.id, format: 'js'
+        end
 
-      it "sets @order_diff to 2" do
-        expect(assigns(:order_diff)).to eq(2)
+        it "@tab is 'Hold'" do
+          expect(TasksController.class_variable_get(:@@tab)).to eq("Hold")
+        end
+
+        it "find status @task" do
+          expect(assigns(:task).status).to eq("Hold")
+        end
+
+        it "find next of @next" do
+          expect(assigns(:next)).to eq(Task.where(name: "task3").first)
+        end
+
+        it "puts task5 at postion 3" do
+          expect(assigns(:task).position).to eq(3)
+        end
+
+        it "puts task3 at position 5" do
+          expect(assigns(:next).position).to eq(5)
+        end
+
+        it "@above_task is task4" do
+          expect(assigns(:above_task)).to eq(Task.where(name: "task4").first)
+        end
+      end
+
+      context "task is ordered top of hold but not first?" do
+        before(:example) do
+          xhr :get, :tab_active, format: 'js'
+          xhr :get, :move_up, id: Task.where(name: "task2").first.id, format: 'js'
+        end
+
+        it "@tab is 'Active'" do
+          expect(TasksController.class_variable_get(:@@tab)).to eq("Active")
+        end
+
+        it "finds correct task and set @task" do
+          expect(assigns(:task).name).to eq("task2")
+        end
+
+        it "doesn't move top task" do
+          expect(assigns(:task).position).to be (2)
+        end
+
+        it "flash danger" do
+          expect(flash[:danger]).to be_present
+        end
+        
+        it "renders nothing" do
+          expect(response.body).to be_blank
+        end
+      end
+    end
+  end
+
+  describe "GET move_down" do
+    let(:user1) { Fabricate(:user) }
+    let!(:taskp) { Fabricate(:task, user_id: user1.id) }
+    
+    before(:example) do
+      (1..6).each do |i|
+        status = ["Active", "Hold"]
+        si = i%2
+        Fabricate(:task, name: "task#{i}", status: status[si], user_id: user1.id)
+        taskp.tasks << Task.last
+      end
+
+      sign_in user1
+    end
+
+    context "All tab" do
+
+      context "task is any where but top" do
+        before(:example) do
+          xhr :get, :tab_all, format: 'js'
+          xhr :get, :move_down, id: Task.where(name: "task5").first.id, format: 'js'
+        end
+        
+        it "finds correct task and set @task" do
+          expect(assigns(:task).name).to eq("task5")
+        end
+
+        it "move task2 to postion 1" do
+          expect(assigns(:task).last?).to be true
+        end
+
+        it "at itentifies next" do
+          expect(assigns(:next).name).to eq("task6")
+        end
+
+        it "moved task6 up to spot 5" do
+          expect(Task.where(name: "task6").first.position).to eq(5)
+        end
+
+        it "flash success" do
+          expect(flash[:success]).to be_present
+        end
+
+        it "@tab is 'All'" do
+          expect(TasksController.class_variable_get(:@@tab)).to eq("All")
+        end
+
+        it "assign @above_task to eq @task" do
+          expect(assigns(:above_task).name).to eq("task5")
+        end
+      end
+
+      context "task is bottom" do
+        
+        before(:example) do
+          xhr :get, :tab_all, format: 'js'
+          xhr :get, :move_down, id: Task.where(name: "task6").first.id, format: 'js'
+        end
+
+        it "finds correct task and set @task" do
+          expect(assigns(:task).name).to eq("task6")
+        end
+
+        it "doesn't move top task" do
+          expect(assigns(:task).last?).to be true
+        end
+
+        it "flash danger" do
+          expect(flash[:danger]).to be_present
+        end
+        
+        it "renders nothing" do
+          expect(response.body).to be_blank
+        end
+      end
+    end
+
+    context "Hold tab" do
+      context "task is ordered in middle atleast 1 away from next" do
+        before(:example) do
+          xhr :get, :tab_hold, format: 'js'
+          xhr :get, :move_down, id: Task.where(name: "task3").first.id, format: 'js'
+        end
+
+        it "@tab is 'Hold'" do
+          expect(TasksController.class_variable_get(:@@tab)).to eq("Hold")
+        end
+
+        it "find status @task" do
+          expect(assigns(:task).status).to eq("Hold")
+        end
+
+        it "find next of @next" do
+          expect(assigns(:next)).to eq(Task.where(name: "task5").first)
+        end
+
+        it "puts task3 at postion 5" do
+          expect(assigns(:task).position).to eq(5)
+        end
+
+        it "puts task5 at position 3" do
+          expect(assigns(:next).position).to eq(3)
+        end
+
+        it "@above_task is task4" do
+          expect(assigns(:above_task)).to eq(Task.where(name: "task4").first)
+        end
+      end
+
+      context "task is ordered top of hold but not first?" do
+        before(:example) do
+          xhr :get, :tab_hold, format: 'js'
+          xhr :get, :move_down, id: Task.where(name: "task5").first.id, format: 'js'
+        end
+
+        it "@tab is 'Active'" do
+          expect(TasksController.class_variable_get(:@@tab)).to eq("Hold")
+        end
+
+        it "finds correct task and set @task" do
+          expect(assigns(:task).name).to eq("task5")
+        end
+
+        it "doesn't move top task" do
+          expect(assigns(:task).position).to be (5)
+        end
+
+        it "flash danger" do
+          expect(flash[:danger]).to be_present
+        end
+        
+        it "renders nothing" do
+          expect(response.body).to be_blank
+        end
       end
     end
   end

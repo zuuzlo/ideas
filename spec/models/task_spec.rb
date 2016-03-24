@@ -27,4 +27,19 @@ RSpec.describe Task, :type => :model do
       expect(task1.percent_complete).to eq(0)
     end
   end
+
+  describe "#task_child?" do
+    let(:user1) { Fabricate(:user) }
+    let(:task1) { Fabricate(:task, percent_complete: 0, user_id: user1.id) }
+    let(:task2) { Fabricate(:task, percent_complete: 0, user_id: user1.id) }
+    before { task1.tasks << task2}
+
+    it "task1 is not child task" do
+      expect(task1.task_child?).to be false
+    end
+
+    it "task2 is a child task" do
+      expect(task2.task_child?).to be true
+    end
+  end
 end

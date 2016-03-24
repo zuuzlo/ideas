@@ -200,7 +200,7 @@ RSpec.describe IdeasController, :type => :controller do
         idea1.categories << cat1
       end
 
-      context "valid input" do
+      context "valid input no name change" do
         before do
           patch :update, idea: {name: idea1.name, description: "changed", category_ids: [ "", cat1.id, cat2.id] }, id: idea1.id, format: 'js'
         end

@@ -1,0 +1,27 @@
+%tr{:id => "jot_#{jot.id}", class: row_class(jot)}
+  %td
+    .s3.l3.jot-up-down
+      - unless jot.first?
+        = link_to move_up_jot_path(jot), remote: true do
+          %span.glyphicon.glyphicon-circle-arrow-up
+      - unless jot.last?
+        = link_to move_down_jot_path(jot), remote: true do
+          %span.glyphicon.glyphicon-circle-arrow-down
+    .s9.l9
+      #{jot.position}
+  %td
+    #{jot.context}
+  %td
+    = bootstrap_form_tag(url: "#{to_new_task_jot_path(jot)}", layout: :inline) do |f|
+      = link_to to_new_idea_jot_path(jot), class: "btn btn-default btn-sm" do
+        Make Idea
+        %span.glyphicon.glyphicon-chevron-right
+      = f.select('idea_id', current_user.ideas.collect { |p| [p.name, p.id] }, {hide_label: true}, {class: "input-sm"} )
+      = f.submit "To Task", class: "btn btn-default btn-sm"
+  %td
+    #{ time_ago_in_words(jot.created_at) } ago
+  %td
+    = link_to edit_jot_path(jot), remote: true do
+      %span.glyphicon.glyphicon-pencil
+    = link_to jot_path(jot), method: :delete, remote: true, data: { confirm: 'Are you sure?' } do
+      %span.glyphicon.glyphicon-trash

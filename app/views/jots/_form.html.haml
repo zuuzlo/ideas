@@ -1,0 +1,6 @@
+= bootstrap_form_for(@jot, remote: true) do |f|
+  = f.text_area :context
+  = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]], "#{@jot.status}"), { label: "Update Idea Status " }, { class: "selectpicker" }
+  = f.hidden_field :user_id, value: current_user.id
+  = f.button class: "btn btn-success"
+  = link_to "Cancel", :back, {:class=>"btn btn-default"}

@@ -1,8 +1,12 @@
 %h1.page-header Idea: #{@idea.name}
+#idea-form
 .panel.panel-default
   #headingOne.panel-heading{role: "tab"}
     %h4.panel-title
       = link_to "#{@idea.name} details", "#collapseOne",'data-toggle' => "collapse",'aria-expanded'=>"true", 'aria-controls'=>"collapseOne"
+      = link_to edit_idea_path(@idea), remote: true, class: 'pull-right' do
+        %span.glyphicon.glyphicon-pencil
+        Edit Idea
   #collapseOne.panel-collapse.collapse.in{ role: "tabpanel", 'aria-labelledby'=>"headingOne" }
     .panel-body
       .row

@@ -1,5 +1,8 @@
 %h1.page-header
+  %span.glyphicon.glyphicon-tags
   Idea Categories
+  %small
+    = link_to "Add new category", new_category_path, remote: true
 #category-form{style: "display:none;"}
 %table.table.table-striped
   %thead
@@ -11,7 +14,5 @@
       %th
         No. Notes
       %th
-      %th
   %tbody#categories
     = render partial: @categories 
-= link_to "Add new category", new_category_path, remote: true

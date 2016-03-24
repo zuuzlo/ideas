@@ -1,0 +1,3 @@
+$("#task_<%= @task.id %>").remove();
+$("#task_<%= @next.id %>").replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: false}) %>");
+$("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @next, child: false}) %>").insertBefore("#task_<%= @above_task.id %>");

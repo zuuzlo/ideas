@@ -27,8 +27,12 @@ gem 'high_voltage', '~> 2.2.1'
 gem 'fabrication'
 gem 'acts_as_list'
 
-
 gem 'unicorn'
+gem "unicorn-rails"
+gem 'sidekiq'
+gem 'redis'
+gem 'activejob_backport'
+gem "sinatra", "~> 1.4.5"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

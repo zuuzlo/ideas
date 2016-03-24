@@ -1,26 +1,24 @@
-var next_visible = $('#task_<%= @task.id %>').prevAll(':visible:first');
+$("#task_<%= @task.id %>").remove();
+$("#task_<%= @next.id %>").replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: false}) %>");
+$("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @next, child: false}) %>").insertAfter("#task_<%= @above_task.id %>");
+
+
+/*
+var next_visible = $("#task_<%= @task.id %>").prevAll(':visible:first');
 var tab_all = $("ul#task_tabs li.active").text().search("All");
 callmeman();
 function callmeman(){
   if(tab_all >= 0) {
-    
-    <% @task.move_higher; @next = @task.lower_item; require 'pry'; binding.pry %> 
-    $('#task_<%= @task.id %>').remove();
-    $(next_visible).replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: false}) %>");
-    $("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @next, child: false}) %>").insertAfter('#task_<%= @task.id %>'); 
+
+    $("#task_<%= @task.id %>").remove();
+    $("#task_<%= @next.id %>").replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: false}) %>");
+    $("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @next, child: false}) %>").insertAfter("#task_<%= @task.id %>"); 
   }
   else {
-  //$(next_visible).insertAfter('#task_<%= @task.id %>'); 
-    <% if @order_diff %> 
-      <% (1..@order_diff.to_i).each do %> 
-        <% @task.move_higher %>
-      <% end %> 
-      <% @next = @task.lower_item; require 'pry'; binding.pry  %>
-        
-      $('#task_<%= @task.id %>').remove();    
-      $(next_visible).replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: false}) %>");
-      $("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @next, child: false}) %>").insertAfter('#task_<%= @task.id %>');
-      //$(next_visible).insertAfter('#task_<%= @task.id %>');
-    <% end %>
+      
+    $("#task_<%= @task.id %>").remove();
+    $("#task_<%= @next.id %>").replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: false}) %>");
+    $("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @next, child: false}) %>").insertAfter("#task_<%= @above_task.id %>");
   }
 }
+*/

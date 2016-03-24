@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
   belongs_to :taskable, polymorphic: true
 
   acts_as_list scope: :taskable
+  
   has_many :tasks,-> { order("position ASC") }, as: :taskable, dependent: :destroy
   has_many :notes, as: :notable, dependent: :destroy
   has_many :idea_links, as: :idea_linkable, dependent: :destroy
@@ -15,8 +16,20 @@ class Task < ActiveRecord::Base
 
   before_validation :ensure_percent_complete_has_value
   
-  extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  #extend FriendlyId
+  #friendly_id :slug_candidates, use: :slugged
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
+
+  def task_child?
+    if self.taskable.is_a? Task
+      true
+    else
+      false
+    end
+  end
 
   protected
     def slug_candidates

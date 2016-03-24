@@ -1,0 +1,4 @@
+var next = $("#jot_<%= @jot.id %>").next();
+$("#jot_<%= @jot.id %>").remove();
+$(next).replaceWith("<%= j (render partial: 'jots/jot', locals: { jot: @jot }) %>");
+$("<%= j (render partial: 'jots/jot', locals: { jot: @next_jot }) %>").insertBefore("#jot_<%= @jot.id %>");

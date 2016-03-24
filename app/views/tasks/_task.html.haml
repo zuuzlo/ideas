@@ -7,11 +7,13 @@
             %span.glyphicon.glyphicon-plus-sign.glyphicon-center{:id => "show_children_task_icon_#{task.id}"}
         - if child
           %span.glyphicon.glyphicon-minus.glyphicon-center
-      .s1.l1.up-down
-        = link_to move_up_task_path(task.id), remote: true do
-          %span.glyphicon.glyphicon-collapse-up
-        = link_to move_up_task_path(task.id), remote: true do
-          %span.glyphicon.glyphicon-collapse-down
+      .s1.l1.jot-up-down
+        - unless task.first?
+          = link_to move_up_task_path(task.id), remote: true do
+            %span.glyphicon.glyphicon-circle-arrow-up
+        - unless task.last?
+          = link_to move_down_task_path(task.id), remote: true do
+            %span.glyphicon.glyphicon-circle-arrow-down
       .s10.l10
         =task.position
         = task.name

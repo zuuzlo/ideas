@@ -4,6 +4,11 @@
       %span.glyphicon.glyphicon-eye-open
       #{idea.name}
   %td
+    - idea.categories.each do |cat|
+      %span.label.label-primary
+        = "#{cat.name}"
+      &nbsp
+  %td
     = idea.notes.count
   %td
     = idea.tasks.count

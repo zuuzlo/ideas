@@ -1,7 +1,8 @@
 - modal ||= false
 - remote = modal ? true : false
 - data_model = task.id ? "edit_task_#{task.id}" : "new_task"
-= bootstrap_form_for([parent, task], layout: :inline, remote: remote, html: { role: :form, 'data-model' => "#{data_model}" }) do |f|
+- route = modal ? [parent, task] : task
+= bootstrap_form_for(route, layout: :inline, remote: remote, html: { role: :form, 'data-model' => "#{data_model}" }) do |f|
   = f.text_field :name
   = f.text_area :description
   = f.select :status, options_for_select([["Hold"], ["Active"], ["Complete"]]), { class: "selectpicker" }
@@ -11,3 +12,4 @@
   = f.date_field :completion_date, class: 'form-control'
   = f.hidden_field :user_id, value: current_user.id
   = f.button class: "btn btn-success"
+  = link_to "Cancel", :back, {:class=>"btn btn-default"}

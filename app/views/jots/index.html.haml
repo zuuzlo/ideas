@@ -1,0 +1,6 @@
+%h1.page-header
+  %span.glyphicon.glyphicon-comment
+  Jots
+  %small
+    = link_to "Add new jot", new_jot_path, remote: true
+= render partial: 'jots/shared/jots_table', locals:{ jots: @jots}

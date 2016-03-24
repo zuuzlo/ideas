@@ -1,7 +1,7 @@
 if ($("ul#task_tabs li.active:contains('<%= @task.status %>')").length > 0 || $("ul#task_tabs li.active:contains('All')").length > 0 ) {
-  $('#task_<%= @task.id %>').replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task}) %>");
+  $('#task_<%= @task.id %>').replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: @task.task_child? }) %>");
   }
 else {
-  $('#task_<%= @task.id %>').replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: false}) %>");
+  $('#task_<%= @task.id %>').replaceWith("<%= j (render partial: 'tasks/task', locals: {parent: @taskable, task: @task, child: @task.task_child? }) %>");
   $('#task_<%= @task.id %>').hide();
 }

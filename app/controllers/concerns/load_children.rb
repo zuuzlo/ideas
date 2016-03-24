@@ -2,6 +2,7 @@ module LoadChildren
   extend ActiveSupport::Concern
 
   def load_children(parent)
+    @@tab = "All"
     @notes = parent.notes
     @tasks = parent.tasks
     @idea_links = parent.idea_links
