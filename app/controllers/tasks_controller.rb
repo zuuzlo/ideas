@@ -31,7 +31,7 @@ class TasksController < ApplicationController
       if @task.update(task_params)
         format.html {@parent = @task; load_children(@parent); flash[:success] = "Successfully updated task."; render :show }
         format.js 
-        #flash[:success] = "Successfully updated task."
+        flash[:success] = "Successfully updated task."
       else
         flash[:danger] = "Something went wrong, try again."
         render :edit

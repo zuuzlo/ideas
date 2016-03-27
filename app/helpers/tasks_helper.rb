@@ -1,6 +1,6 @@
 module TasksHelper
   def taskable_link(type, id)
-    taskable_path = type.constantize.friendly.find(id)
+    taskable_path = type.constantize.find(id)
     link_to "Link to Parent", taskable_path
   end
 
@@ -15,6 +15,17 @@ module TasksHelper
       (sum_percent_complete / tasks.count).to_i
     else
       0
+    end
+  end
+  
+  def row_class_task(task)
+    case task.status
+    when "Hold"
+      return "row-warning"
+    when "Complete"
+      return "row-info"
+    else
+      return "row-success"
     end
   end
 end

@@ -1,4 +1,4 @@
-.row.task-grid{:id => "task_#{task.id}", 'data-type' => "#{task.status}" }
+.row.task-grid{:id => "task_#{task.id}", 'data-type' => "#{task.status}", class: "#{row_class_task(task)}" }
   = bootstrap_form_tag url: update_task_task_path(task.id), remote: true, layout: :inline do |f|
     .s2.l2
       .s1.l1

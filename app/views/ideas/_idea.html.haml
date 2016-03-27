@@ -1,4 +1,4 @@
-%tr{:id => "idea_#{idea.id}"}
+%tr{:id => "idea_#{idea.id}", class: row_class(idea)}
   %td 
     = link_to idea_path(idea) do
       %span.glyphicon.glyphicon-eye-open

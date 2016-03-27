@@ -335,7 +335,7 @@ RSpec.describe JotsController, :type => :controller do
 
     before do
       sign_in user1
-      xhr :get, :to_new_idea, id: jot1.id, format: 'js'
+      xhr :get, :to_new_idea, id: jot1.id #, format: 'js'
     end
     
     it "assigns jot" do
@@ -347,7 +347,7 @@ RSpec.describe JotsController, :type => :controller do
     end
 
     it "redirects to create idea" do
-      expect(response).to redirect_to @ideas
+      expect(response).to redirect_to ideas_path
     end
   end
 
@@ -358,30 +358,46 @@ RSpec.describe JotsController, :type => :controller do
     (1..3).each do |i|
       let!("jot#{i}".to_sym) { Fabricate(:jot, context: "jot_name#{i}", user_id: user1.id) }
     end
+    context "input good" do
+      before(:example) do
+        sign_in user1
+        post :to_new_task, idea_id: idea1.id, id: jot1.id #, format: 'js'
+      end
 
-    before(:example) do
-      sign_in user1
-      post :to_new_task, idea_id: idea1.id, id: jot1.id, format: 'js'
+      it "assigns parent" do
+        expect(assigns(:parent)).to eq(idea1)
+      end
+
+      it "assigns jot" do
+        expect(assigns(:jot)).to eq(jot1)
+      end
+
+      it "adds new task to idea1" do
+        expect(assigns(:parent).tasks.count).to eq(1)
+      end
+
+      it "task name to equal jot context" do
+        expect(assigns(:parent).tasks.first.name).to eq(jot1.context)
+      end
+
+      it "redirects to create idea" do
+        expect(response).to redirect_to task_path(assigns(:task))
+      end
+
+      it "has success"
     end
 
-    it "assigns idea" do
-      expect(assigns(:idea)).to eq(idea1)
-    end
+    context "input bad" do
+      before(:example) do
+        sign_in user1
+        post :to_new_task, idea_id: nil, id: jot1.id #, format: 'js'
+      end
 
-    it "assigns jot" do
-      expect(assigns(:jot)).to eq(jot1)
-    end
+      it "redirects to create idea" do
+        expect(response).to redirect_to task_path(assigns(:task))
+      end
 
-    it "adds new task to idea1" do
-      expect(assigns(:idea).tasks.count).to eq(1)
-    end
-
-    it "task name to equal jot context" do
-      expect(assigns(:idea).tasks.first.name).to eq(jot1.context)
-    end
-
-    it "redirects to create idea" do
-      expect(response).to redirect_to idea_path(:idea1)
+      it "has danger"
     end
   end
 end

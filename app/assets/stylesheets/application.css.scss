@@ -55,13 +55,14 @@ td>.form-group {
 
 .row.task-grid-header {
   border-bottom: 2px solid $table-border-color;
-  margin: 3px 5px 3px 5px;
+  padding: 3px 5px 3px 5px;
+  margin: 0px;
 }
 
 .row.task-grid {
   border-bottom: 1px solid $table-border-color;
-  margin: 0px 5px 3px 5px;
-  //padding-bottom: 3px;
+  margin: 0px 0px 0px 0px;
+  padding: 3px;
 }
 
 .glyphicon-center {
@@ -105,4 +106,17 @@ body { padding-top: 70px; }
 
 form {
   margin-bottom: 10px;
+}
+
+
+.row.row-warning{
+  background-color: #fcf8e3;
+}
+
+.row.row-info{
+  background-color: #d9edf7;
+}
+
+.row.row-success{
+  background-color: #dff0d8;
 }
