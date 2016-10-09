@@ -15,8 +15,8 @@
         - if user_signed_in?
           %li{:class => "#{'active' if current_page?(ideas_path)}" }
             = link_to ideas_path do
-              %span.glyphicon.glyphicon-home
-              Home
+              %span.glyphicon.glyphicon-cog
+              Ideas
         - else
           %li{:class => 'active'}
             = link_to "#" do

@@ -28,7 +28,7 @@ $(document).ajaxComplete (event, request) ->
     setTimeout (->
       $('#message_modal').modal 'hide'
       return
-    ), 4000 if msg
+    ), 2000 if msg
     ###$("#flash_hook").replaceWith("<div id='flash_hook'>
           <div class='alert " + alert_type + "'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>

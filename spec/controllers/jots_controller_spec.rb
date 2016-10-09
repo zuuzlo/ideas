@@ -347,7 +347,7 @@ RSpec.describe JotsController, :type => :controller do
     end
 
     it "redirects to create idea" do
-      expect(response).to redirect_to ideas_path
+      expect(response.body).to match "window.location.href='/ideas'"
     end
   end
 
@@ -381,10 +381,14 @@ RSpec.describe JotsController, :type => :controller do
       end
 
       it "redirects to create idea" do
-        expect(response).to redirect_to task_path(assigns(:task))
+        #expect(response).to redirect_to task_path(assigns(:task))
+        id = assigns(:parent).tasks.first.id
+        expect(response.body).to match "window.location.href='/tasks/#{id}'"
       end
 
-      it "has success"
+      it "has success" do
+        expect(flash[:success]).to be_present
+      end
     end
 
     context "input bad" do
@@ -394,7 +398,8 @@ RSpec.describe JotsController, :type => :controller do
       end
 
       it "redirects to create idea" do
-        expect(response).to redirect_to task_path(assigns(:task))
+        #expect(response).to redirect_to task_path(assigns(:task))
+        expect(response.body).to match "window.location.href='/ideas'"
       end
 
       it "has danger"

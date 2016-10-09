@@ -1,0 +1,64 @@
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m*[0m[31mF[0m[33m*[0m
+
+Pending: (Failures listed here are expected and do not affect your suite's status)
+[33m
+  1) JotsController POST to_new_task input good has success[0m
+     [36m# Not yet implemented[0m
+[36m     # ./spec/controllers/jots_controller_spec.rb:389
+[0m[33m
+  2) JotsController POST to_new_task input bad has danger[0m
+     [36m# Not yet implemented[0m
+[36m     # ./spec/controllers/jots_controller_spec.rb:403
+[0m
+
+Failures:
+
+  1) JotsController POST to_new_task input bad redirects to create idea
+     [31mFailure/Error: [0m@parent = current_user.ideas.find(params[[33m:idea_id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea without an ID[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:421:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/associations/collection_association.rb:99:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/associations/collection_proxy.rb:141:in `find'[0m
+     [36m# ./app/controllers/jots_controller.rb:71:in `to_new_task'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/implicit_render.rb:4:in `send_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:198:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rendering.rb:10:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:20:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:117:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:117:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:520:in `post'[0m
+     [36m# ./spec/controllers/jots_controller_spec.rb:395:in `block (4 levels) in <top (required)>'[0m
+
+Finished in 1.45 seconds (files took 1.47 seconds to load)
+[31m57 examples, 1 failure, 2 pending[0m
+
+Failed examples:
+
+[31mrspec ./spec/controllers/jots_controller_spec.rb:398[0m [36m# JotsController POST to_new_task input bad redirects to create idea[0m
+

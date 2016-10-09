@@ -143,7 +143,7 @@ RSpec.describe TasksController, :type => :controller do
     end
 
     context "invalid input" do
-      before do
+      before(:example) do
         patch :update, task: { name: nil, description: 'edit task description', status: "Active", assigned_by: user1.id, assigned_to: user1.id, user_id: user1.id, percent_complete: 10, start_date: Time.now, finish_date: Time.now + 5.days, completion_date: Time.now + 10.days },id: task1.id, idea_id: idea1.id, format: 'js'
       end
 

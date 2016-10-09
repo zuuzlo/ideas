@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-gem 'rails', '4.1.8'
+ruby '2.2.1' #ruby '2.0.0'
+gem 'rails', '4.2.5.1' #'4.1.8'
 gem 'pg'
 #gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.2.0'
@@ -31,7 +31,7 @@ gem 'unicorn'
 gem "unicorn-rails"
 gem 'sidekiq'
 gem 'redis'
-gem 'activejob_backport'
+#gem 'activejob_backport'
 gem "sinatra", "~> 1.4.5"
 
 # Use Capistrano for deployment
@@ -48,10 +48,13 @@ end
 
 group :development do
   gem 'letter_opener'
-  gem 'capistrano', '~> 3.3.5'
-  gem 'capistrano-rails', '~> 1.1.2'
+  gem 'capistrano', '~> 3.4'
   gem 'capistrano-bundler'
-  gem 'capistrano-rbenv', "~> 2.0.3"
+  gem 'capistrano-rails', '~> 1.1.0'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-rvm', '~> 0.1.1'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-ssh-doctor', '~> 1.0'
   gem 'capistrano-cookbook', require: false
 end
 

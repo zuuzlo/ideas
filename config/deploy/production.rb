@@ -9,7 +9,8 @@ set :server_name, "ideas.zuuzlo.com"
 # app side by side. Also provides quick sanity checks when looking
 # at filepaths
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
-server '104.131.162.134', user: 'deploy', roles: %w{web app db}, primary: true
+server 'do.zuuzlo.com', user: 'deploy', roles: %w{web app db}, primary: true
+#server '104.131.162.134', user: 'deploy', roles: %w{web app db}, primary: true
 set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
 
 # dont try and infer something as important as environment from
@@ -18,7 +19,7 @@ set :rails_env, :production
 
 # number of unicorn workers, this will be reflected in
 # the unicorn.rb and the monit configs
-set :unicorn_worker_count, 3
+set :unicorn_worker_count, 1
 
 # whether we're using ssl or not, used for building nginx
 # config file

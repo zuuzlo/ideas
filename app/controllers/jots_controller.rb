@@ -59,7 +59,6 @@ class JotsController < ApplicationController
     if @idea.save
       flash[:success] = "Idea created from Jot."
       render :js => "window.location.href='"+ideas_path+"'"
-      #redirect_to ideas_path
     else
       flash[:danger] = "Something went wrong, try again."
       render nothing: true
@@ -69,7 +68,7 @@ class JotsController < ApplicationController
   def to_new_task
 
     @jot = current_user.jots.find(params[:id])
-    @parent = current_user.ideas.find(params[:idea_id])
+    @parent = current_user.ideas.find(params[:idea_id]) 
     @task = Task.create(user_id: current_user.id, name: @jot.context, status: "Hold", taskable_type: "Idea", taskable_id: @parent.id)
     #@parent.tasks << Task.create(user_id: current_user.id, name: @jot.context, status: "Hold")
     if @task.save
