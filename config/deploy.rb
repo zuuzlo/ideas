@@ -48,9 +48,7 @@ set(:config_files, %w(
   unicorn_init.sh
 ))
 
-set(:executable_config_files, %w(
-  unicorn_init.sh
-))
+
 
 set(:symlinks, [
   {
@@ -62,6 +60,10 @@ set(:symlinks, [
     link: "/etc/init.d/unicorn_#{fetch(:full_app_name)}"
   }
 ])
+
+set(:executable_config_files, %w(
+  unicorn_init.sh
+))
 
 after 'deploy:setup_config', 'nginx:reload'
 
