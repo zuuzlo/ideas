@@ -48,6 +48,10 @@ set(:config_files, %w(
   unicorn_init.sh
 ))
 
+set(:executable_config_files, %w(
+  unicorn_init.sh
+))
+
 set(:symlinks, [
   {
     source: "nginx.conf",
