@@ -35,6 +35,7 @@ gem 'redis'
 gem "sinatra", "~> 1.4.5"
 
 gem "figaro"
+gem 'mailgun_rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -53,7 +54,7 @@ group :development do
   gem 'capistrano', '~> 3.4'
   gem 'capistrano-bundler'
   gem 'capistrano-rails', '~> 1.1.0'
-  gem 'capistrano-rails-console'
+  gem 'capistrano-rails-console', require: false
   gem 'capistrano-rvm', '~> 0.1.1'
   gem 'capistrano-sidekiq'
   gem 'capistrano-ssh-doctor', '~> 1.0'
