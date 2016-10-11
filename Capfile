@@ -23,7 +23,17 @@ require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano/ssh_doctor'
-require 'capistrano/cookbook'
+#require 'capistrano/cookbook'
+
+require 'capistrano/cookbook/check_revision'
+require 'capistrano/cookbook/compile_assets_locally'
+require 'capistrano/cookbook/create_database'
+require 'capistrano/cookbook/logs'
+#require 'capistrano/cookbook/monit'
+require 'capistrano/cookbook/nginx'
+require 'capistrano/cookbook/restart'
+require 'capistrano/cookbook/run_tests'
+require 'capistrano/cookbook/setup_config'
 # require 'capistrano/passenger'
 
 # Load custom tasks from `lib/capistrano/tasks' if you have any defined

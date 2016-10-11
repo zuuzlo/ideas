@@ -34,6 +34,8 @@ gem 'redis'
 #gem 'activejob_backport'
 gem "sinatra", "~> 1.4.5"
 
+gem "figaro"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
