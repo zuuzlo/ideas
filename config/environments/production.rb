@@ -81,4 +81,6 @@ Rails.application.configure do
     domain: ENV["MAILGUN_DOMAIN"]
   }
 
+  Rails.application.routes.default_url_options[:host] = 'ideas.zuuzlo.com'
+
 end
