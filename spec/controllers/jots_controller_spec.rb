@@ -394,15 +394,12 @@ RSpec.describe JotsController, :type => :controller do
     context "input bad" do
       before(:example) do
         sign_in user1
-        post :to_new_task, idea_id: nil, id: jot1.id #, format: 'js'
+        post :to_new_task, idea_id: idea1.id, id: jot1.id #, format: 'js'
       end
 
-      it "redirects to create idea" do
-        #expect(response).to redirect_to task_path(assigns(:task))
-        expect(response.body).to match "window.location.href='/ideas'"
+      it "has danger" do
+        expect(flash[:danger]).to be_present
       end
-
-      it "has danger"
     end
   end
 end

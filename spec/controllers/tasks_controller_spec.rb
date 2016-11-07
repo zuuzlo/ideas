@@ -155,8 +155,8 @@ RSpec.describe TasksController, :type => :controller do
         expect(assigns(:taskable)).to eq(idea1)
       end
 
-      it "renders edit" do
-        expect(response).to render_template :edit
+      it "renders update" do
+        expect(response).to render_template :update
       end
 
       it "task is not updated" do
@@ -373,7 +373,7 @@ RSpec.describe TasksController, :type => :controller do
 
   describe "GET move_up" do
     let(:user1) { Fabricate(:user) }
-    let!(:taskp) { Fabricate(:task, user_id: user1.id) }
+    let!(:taskp) { Fabricate(:task, name: "parent task",  user_id: user1.id) }
     
     before(:example) do
       (1..6).each do |i|
@@ -382,7 +382,6 @@ RSpec.describe TasksController, :type => :controller do
         Fabricate(:task, name: "task#{i}", status: status[si], user_id: user1.id)
         taskp.tasks << Task.last
       end
-
       sign_in user1
     end
 
