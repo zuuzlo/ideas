@@ -55,6 +55,9 @@ class CategoriesController < ApplicationController
     @notable = @category
     @ideas = @category.ideas
   end
+
+  def index
+  end
   
   private
 
