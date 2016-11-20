@@ -1,4 +1,11 @@
 %tr{:id => "idea_#{idea.id}", class: row_class(idea)}
+  %td.jot-up-down
+    - unless idea.first?
+      = link_to move_up_idea_path(idea), remote: true do
+        %span.glyphicon.glyphicon-circle-arrow-up
+    - unless idea.last?
+      = link_to move_down_idea_path(idea), remote: true do
+        %span.glyphicon.glyphicon-circle-arrow-down
   %td 
     = link_to idea_path(idea) do
       %span.glyphicon.glyphicon-eye-open

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :categories, dependent: :destroy
   has_many :notes, dependent: :destroy
-  has_many :ideas, dependent: :destroy
+  has_many :ideas, -> { order(position: :asc) }, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :idea_links, dependent: :destroy
   has_many :jots, -> { order(position: :asc) }, dependent: :destroy

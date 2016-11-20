@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   require 'sidekiq/web'
+  require 'sidekiq/cron/web'
   
   devise_for :users, :path => "accounts"
   #root to: 'devise/sessions#new'
@@ -13,6 +14,11 @@ Rails.application.routes.draw do
 
     resources :idea_links do
       :idea_links
+    end
+
+    member do
+      get :move_up
+      get :move_down
     end
 
     resources :tasks do

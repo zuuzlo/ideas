@@ -1,0 +1,4 @@
+var next = $("#idea_<%= @idea.id %>").prev();
+$("#idea_<%= @idea.id %>").remove();
+$(next).replaceWith("<%= j (render partial: 'ideas/idea', locals: { idea: @idea }) %>");
+$("<%= j (render partial: 'ideas/idea', locals: { idea: @next_idea }) %>").insertAfter("#idea_<%= @idea.id %>");

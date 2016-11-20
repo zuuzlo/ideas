@@ -33,6 +33,7 @@ gem 'unicorn'
 gem "unicorn-rails"
 gem 'sidekiq'
 gem 'redis'
+gem "sidekiq-cron", "~> 0.4.0"
 #gem 'activejob_backport'
 gem "sinatra", "~> 1.4.5"
 

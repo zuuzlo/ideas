@@ -1,0 +1,22 @@
+!!!
+%hmtl
+  %head
+    %meta(content='text/html; charset=UTF-8' http-equiv='Content-Type')
+  %body
+    #{@user.email} has overdue tasks
+    %br
+    Tasks are:
+    %table.table
+      %thead
+        %tr
+          %th
+            Name / Link
+          %th
+            Due Date
+      - @tasks.each do |task|
+        %tr
+          %td
+            = link_to "#{task.name}", task_url(task)
+          %td
+            #{task.finish_date}
+

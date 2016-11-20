@@ -42,4 +42,38 @@ RSpec.describe Task, :type => :model do
       expect(task2.task_child?).to be true
     end
   end
+
+  describe "#over_due?" do
+    let(:user1) { Fabricate(:user) }
+    let(:task1) { Fabricate(:task, finish_date: Time.now + 2.days, status: "Active", percent_complete: 0, user_id: user1.id) }
+    let(:task2) { Fabricate(:task, finish_date: Time.now - 1.days, status: "Active", percent_complete: 0, user_id: user1.id) }
+    let(:task3) { Fabricate(:task, finish_date: nil, status: "Active", percent_complete: 0, user_id: user1.id) }
+    let(:task4) { Fabricate(:task, finish_date: Time.now - 1.days, status: "Complete", percent_complete: 0, user_id: user1.id) }
+    let(:task5) { Fabricate(:task, finish_date: Time.now - 1.days, status: "Hold", percent_complete: 0, user_id: user1.id) }
+    
+    context "status = Active" do
+      it "task finish_date < today (overdue = true)" do
+        expect(task2.over_due?).to be true
+      end
+
+      it "task finish_date > today (overdue = false)" do
+        expect(task1.over_due?).to be false
+      end
+
+      it "task finish_date nil (overdue = false)" do
+        expect(task3.over_due?).to be false
+      end
+    end
+
+    context "status is not Active" do
+      it "task finish_date < today (overdue = false)" do
+        expect(task4.over_due?).to be false
+      end
+
+      it "task finish_date < today (overdue = false)" do
+        expect(task5.over_due?).to be false
+      end
+    end
+
+  end
 end

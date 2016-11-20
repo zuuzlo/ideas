@@ -14,7 +14,7 @@ class Task < ActiveRecord::Base
   validates :status, :inclusion => { :in => %w(Hold Active Complete) }
   validates :percent_complete, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
-  before_validation :ensure_percent_complete_has_value
+  before_validation :ensure_percent_complete_has_value, :ensure_status_has_value
   
   #extend FriendlyId
   #friendly_id :slug_candidates, use: :slugged
@@ -26,6 +26,19 @@ class Task < ActiveRecord::Base
   def task_child?
     if self.taskable.is_a? Task
       true
+    else
+      false
+    end
+  end
+
+  def over_due?
+    
+    if self.finish_date  && self.status == "Active"
+      if self.finish_date < Time.now
+        true
+      else
+        false
+      end  
     else
       false
     end
@@ -43,5 +56,9 @@ class Task < ActiveRecord::Base
 
     def ensure_percent_complete_has_value
       self.percent_complete ||= 0
+    end
+
+    def ensure_status_has_value
+      self.status ||= "Hold"
     end
 end

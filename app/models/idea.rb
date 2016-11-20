@@ -4,6 +4,8 @@ class Idea < ActiveRecord::Base
   has_many :tasks,-> { order("position ASC") }, as: :taskable, dependent: :destroy
   has_many :idea_links, as: :idea_linkable, dependent: :destroy
   has_and_belongs_to_many :categories, -> { uniq }
+
+  acts_as_list scope: :user
   
   validates :name, presence: true
   validates_uniqueness_of :name, case_sensitive: false, scope: :user_id

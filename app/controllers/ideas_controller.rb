@@ -1,9 +1,10 @@
 class IdeasController < ApplicationController
   include LoadChildren
   before_action :authenticate_user!
-  before_action :all_ideas, only: [:index, :create, :update]
-  before_action :set_idea, only: [:destroy, :edit, :update, :show, :update_status, :remove_category]
   respond_to :js, :html
+  before_action :all_ideas, only: [:index, :create, :update]
+  before_action :set_idea, only: [:destroy, :edit, :update, :show, :update_status, :remove_category, :move_up, :move_down]
+  
 
   def new
     @idea = Idea.new
@@ -78,6 +79,30 @@ class IdeasController < ApplicationController
     flash[:success] = "Removed category from idea"
   end
 
+  def move_up
+
+    if @idea.first?
+      flash[:danger] = "Idea is already at the top."
+      render nothing: true
+    else
+      @idea.move_higher
+      @next_idea = @idea.lower_item
+      flash[:success] = "Idea moved up the list."
+    end
+  end
+
+  def move_down
+    if @idea.last?
+      flash[:danger] = "Idea is already at the bottom."
+      render nothing: true
+    else
+      @idea.move_lower
+      @next_idea = @idea.higher_item
+      flash[:success] = "Idea moved down the list."
+    end
+
+  end
+
   private
     def set_idea
       @idea = current_user.ideas.friendly.find(params[:id])
@@ -88,6 +113,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :benefits, :problem_solves, :user_id, :slug, :status, :category_ids)
+      params.require(:idea).permit(:name, :description, :benefits, :problem_solves, :user_id, :slug, :status, :category_ids, :id)
     end
 end

@@ -341,7 +341,7 @@ RSpec.describe IdeasController, :type => :controller do
   describe "DELETE destroy" do
     let!(:user1) { Fabricate(:user) }
     (1..3).each do |i|
-        let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
+      let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
     end
     let!(:note1) { Fabricate(:note, user_id: user1.id) }
     let!(:note2) { Fabricate(:note, user_id: user1.id) }
@@ -369,6 +369,146 @@ RSpec.describe IdeasController, :type => :controller do
 
     it "renders destroy" do
       expect(response).to render_template("destroy")
+    end
+  end
+
+  describe "GET move_up" do
+    let(:user1) { Fabricate(:user) }
+    
+    context "idea is not top" do
+
+      before(:example) do
+
+        sign_in user1
+        
+        (1..6).each do |i|
+          status = ["Active", "Hold"]
+          si = i%2
+          Fabricate(:idea, name: "idea#{i}", status: status[si], user_id: user1.id)
+        end
+        
+        xhr :get, :move_up, id: Idea.where(name: "idea2").first.id, format: 'js'
+      end
+
+      it "finds correct idea and sets @idea" do
+        expect(assigns(:idea).name).to eq("idea2")
+      end
+
+      it "move idea2 to postion 1" do
+        expect(Idea.where(name: "idea2").first.position).to eq(1)
+      end
+
+      it "at itentifies next" do
+        expect(assigns(:next_idea).name).to eq("idea1")
+      end
+
+      it "moved idea1 down to spot 2" do
+        expect(Idea.where(name: "idea1").first.position).to eq(2)
+      end
+
+      it "flash success" do
+        expect(flash[:success]).to be_present
+      end
+    end
+
+    context "idea is top" do
+      before(:example) do
+
+        sign_in user1
+        
+        (1..6).each do |i|
+          status = ["Active", "Hold"]
+          si = i%2
+          Fabricate(:idea, name: "idea#{i}", status: status[si], user_id: user1.id)
+        end
+        
+        xhr :get, :move_up, id: Idea.where(name: "idea1").first.id, format: 'js'
+      end
+
+      it "finds correct idea and sets @idea" do
+        expect(assigns(:idea).name).to eq("idea1")
+      end
+
+      it "move idea1 staus at postion 1" do
+        expect(Idea.where(name: "idea1").first.position).to eq(1)
+      end
+
+      it "flash failure" do
+        expect(flash[:danger]).to be_present
+      end
+      it "renders nothing" do
+        expect(response.body).to be_blank
+      end
+    end
+  end
+
+  describe "GET move_down" do
+    let(:user1) { Fabricate(:user) }
+    
+    context "idea is not bottom" do
+
+      before(:example) do
+
+        sign_in user1
+        
+        (1..6).each do |i|
+          status = ["Active", "Hold"]
+          si = i%2
+          Fabricate(:idea, name: "idea#{i}", status: status[si], user_id: user1.id)
+        end
+        
+        xhr :get, :move_down, id: Idea.where(name: "idea2").first.id, format: 'js'
+      end
+
+      it "finds correct idea and sets @idea" do
+        expect(assigns(:idea).name).to eq("idea2")
+      end
+
+      it "move idea2 to postion 3" do
+        expect(Idea.where(name: "idea2").first.position).to eq(3)
+      end
+
+      it "at itentifies next" do
+        expect(assigns(:next_idea).name).to eq("idea3")
+      end
+
+      it "moved idea3 upto to spot 2" do
+        expect(Idea.where(name: "idea3").first.position).to eq(2)
+      end
+
+      it "flash success" do
+        expect(flash[:success]).to be_present
+      end
+    end
+
+    context "idea is bottom" do
+      before(:example) do
+
+        sign_in user1
+        
+        (1..6).each do |i|
+          status = ["Active", "Hold"]
+          si = i%2
+          Fabricate(:idea, name: "idea#{i}", status: status[si], user_id: user1.id)
+        end
+        
+        xhr :get, :move_down, id: Idea.where(name: "idea6").first.id, format: 'js'
+      end
+
+      it "finds correct idea and sets @idea" do
+        expect(assigns(:idea).name).to eq("idea6")
+      end
+
+      it "move idea1 staus at postion 1" do
+        expect(Idea.where(name: "idea6").first.position).to eq(6)
+      end
+
+      it "flash failure" do
+        expect(flash[:danger]).to be_present
+      end
+      it "renders nothing" do
+        expect(response.body).to be_blank
+      end
     end
   end
 end
