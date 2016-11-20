@@ -23,6 +23,7 @@ module Ideas
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     #added 11-19-2016
-    config.assets.prefix = 'prepackaged-assets'
+    #config.assets.prefix = 'prepackaged-assets'
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end
