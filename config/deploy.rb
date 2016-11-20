@@ -38,9 +38,30 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+#start adding here 11-19-2016
+# Defaults to :db role
+set :migration_role, :db
+
+# Defaults to the primary :db server
+set :migration_servers, -> { primary(fetch(:migration_role)) }
+
+# Defaults to false
+# Skip migration if files in db/migrate were not modified
+set :conditionally_migrate, true
+
+# Defaults to [:web]
+set :assets_roles, [:web, :app]
+
+# Defaults to 'assets'
+# This should match config.assets.prefix in your rails config/application.rb
+set :assets_prefix, 'prepackaged-assets'
+
+# If you need to touch public/images, public/javascripts, and public/stylesheets on each deploy
+set :normalize_asset_timestamps, %w{public/images public/javascripts public/stylesheets}
+#ended adding here 11-19-2016
 
 # Default value for keep_releases is 5
-set :keep_releases, 5
+set :keep_releases, 3
 
 set(:config_files, %w(
   nginx.conf
@@ -91,7 +112,7 @@ namespace :deploy do
   # As of Capistrano 3.1, the `deploy:restart` task is not called
   # automatically.
   after 'deploy:publishing', 'deploy:restart'
-
+=begin
   Rake::Task['deploy:assets:backup_manifest'].clear_actions
   namespace :deploy do
     namespace :assets do
@@ -106,7 +127,7 @@ namespace :deploy do
       end
     end
   end
-  
+=end
   desc 'Runs rake db:seed'
   task :seed => [:set_rails_env] do
     on primary fetch(:migration_role) do
