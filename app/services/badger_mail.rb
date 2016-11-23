@@ -25,7 +25,7 @@ class BadgerMail
     users = self.get_users_with_tasks
     users.each do |user|
       tasks = self.get_user_overdue_tasks(user)
-      BadgerMailer.overdue_tasks_email(user, tasks).deliver_later
+      BadgerMailer.overdue_tasks_email(user, tasks).deliver_later unless tasks.empty?
     end
   end
 end

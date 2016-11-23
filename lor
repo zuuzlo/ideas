@@ -1,88 +1,355 @@
-Run options: include {:locations=>{"./spec/services/badger_mail_spec.rb"=>[74]}}
-[31mF[0m[32m.[0m
+Run options: include {:locations=>{"./spec/controllers/ideas_controller_spec.rb"=>[121]}}
+[31mF[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m[31mF[0m
 
 Failures:
 
-  1) BadgerMail send_mail renders the subject
-     [31mFailure/Error: [0mmail([35mto[0m: @user.email, [35msubject[0m: [31m[1;31m'[0m[31mYou have overdue tasks[1;31m'[0m[31m[0m)[0m
+  1) IdeasController GET show non user views returns http success
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
      [31m[0m
-     [31mNoMethodError:[0m
-     [31m  undefined method `email' for {"_aj_globalid"=>"gid://ideas/User/1602"}:Hash[0m
-     [36m# ./app/mailers/badger_mailer.rb:7:in `overdue_tasks_email'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:198:in `process_action'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:20:in `block in process_action'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:88:in `__run_callbacks__'[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4413 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
      [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
      [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
      [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
      [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
      [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/base.rb:596:in `block in process'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/base.rb:593:in `process'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/base.rb:584:in `initialize'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/message_delivery.rb:25:in `new'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/message_delivery.rb:25:in `__getobj__'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/message_delivery.rb:34:in `message'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/message_delivery.rb:85:in `deliver_now'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionmailer-4.2.5.1/lib/action_mailer/delivery_job.rb:10:in `perform'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/execution.rb:32:in `block in perform_now'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:117:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:117:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:498:in `block (2 levels) in around'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:343:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:343:in `block (2 levels) in simple'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/i18n-0.7.0/lib/i18n.rb:257:in `with_locale'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/translation.rb:7:in `block (2 levels) in <module:Translation>'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:441:in `instance_exec'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:441:in `block in make_lambda'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:342:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:342:in `block in simple'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:497:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:497:in `block in around'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:498:in `block (2 levels) in around'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:343:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:343:in `block (2 levels) in simple'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/logging.rb:23:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/logging.rb:23:in `block (4 levels) in <module:Logging>'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/logging.rb:22:in `block (3 levels) in <module:Logging>'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/logging.rb:43:in `block in tag_logger'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/tagged_logging.rb:68:in `block in tagged'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/tagged_logging.rb:26:in `tagged'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/tagged_logging.rb:68:in `tagged'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/logging.rb:43:in `tag_logger'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/logging.rb:19:in `block (2 levels) in <module:Logging>'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:441:in `instance_exec'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:441:in `block in make_lambda'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:342:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:342:in `block in simple'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:497:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:497:in `block in around'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:505:in `call'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_perform_callbacks'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/execution.rb:31:in `perform_now'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/execution.rb:16:in `perform_now'[0m
-     [36m# ./spec/services/badger_mail_spec.rb:84:in `block (4 levels) in <top (required)>'[0m
-     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activejob-4.2.5.1/lib/active_job/test_helper.rb:198:in `perform_enqueued_jobs'[0m
-     [36m# ./spec/services/badger_mail_spec.rb:84:in `block (3 levels) in <top (required)>'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
 
-Finished in 1.6 seconds (files took 1.6 seconds to load)
-[31m2 examples, 1 failure[0m
+  2) IdeasController GET show non user views sets @idea
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4416 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
+
+  3) IdeasController GET show non user views sets @notes
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4419 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
+
+  4) IdeasController GET show non user views sets @note
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4422 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
+
+  5) IdeasController GET show non user views loads idea tasks into @tasks
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4425 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
+
+  6) IdeasController GET show non user views sets @task
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4428 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
+
+  7) IdeasController GET show non user views sets @idea_link
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4431 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
+
+  8) IdeasController GET show non user views loads idea idea_links into @idea_link
+     [31mFailure/Error: [0m@idea = current_user.ideas.friendly.find(params[[33m:id[0m])[0m
+     [31m[0m
+     [31mActiveRecord::RecordNotFound:[0m
+     [31m  Couldn't find Idea with 'id'=4434 [WHERE "ideas"."user_id" = ?][0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:324:in `raise_record_not_found_exception!'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:444:in `find_one'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:423:in `find_with_ids'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/relation/finder_methods.rb:71:in `find'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/friendly_id-5.0.5/lib/friendly_id/finder_methods.rb:22:in `find'[0m
+     [36m# ./app/controllers/ideas_controller.rb:108:in `set_idea'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `block in call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `each'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:504:in `call'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:92:in `__run_callbacks__'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/callbacks.rb:81:in `run_callbacks'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/callbacks.rb:19:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/rescue.rb:29:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `block in instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activesupport-4.2.5.1/lib/active_support/notifications.rb:164:in `instrument'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/activerecord-4.2.5.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/abstract_controller/base.rb:137:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionview-4.2.5.1/lib/action_view/rendering.rb:30:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:639:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:67:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `block in process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `catch'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:100:in `_catch_warden'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/devise-4.2.0/lib/devise/test/controller_helpers.rb:33:in `process'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:514:in `get'[0m
+     [36m# /usr/local/rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5.1/lib/action_controller/test_case.rb:550:in `xml_http_request'[0m
+     [36m# ./spec/controllers/ideas_controller_spec.rb:127:in `block (4 levels) in <top (required)>'[0m
+
+Finished in 0.89055 seconds (files took 1.62 seconds to load)
+[31m8 examples, 8 failures[0m
 
 Failed examples:
 
-[31mrspec ./spec/services/badger_mail_spec.rb:81[0m [36m# BadgerMail send_mail renders the subject[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:130[0m [36m# IdeasController GET show non user views returns http success[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:134[0m [36m# IdeasController GET show non user views sets @idea[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:137[0m [36m# IdeasController GET show non user views sets @notes[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:141[0m [36m# IdeasController GET show non user views sets @note[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:145[0m [36m# IdeasController GET show non user views loads idea tasks into @tasks[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:149[0m [36m# IdeasController GET show non user views sets @task[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:153[0m [36m# IdeasController GET show non user views sets @idea_link[0m
+[31mrspec ./spec/controllers/ideas_controller_spec.rb:157[0m [36m# IdeasController GET show non user views loads idea idea_links into @idea_link[0m
 

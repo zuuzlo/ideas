@@ -24,29 +24,53 @@ RSpec.describe IdeasController, :type => :controller do
   end
 
   describe "GET index" do
-    let!(:user1) { Fabricate(:user) }
-    (1..3).each do |i|
-      let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
-    end
+    context "owner of idea" do
+      let!(:user1) { Fabricate(:user) }
+      (1..3).each do |i|
+        let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
+      end
 
-    before do
-      sign_in user1
-      get :index
-    end
+      before do
+        sign_in user1
+        get :index
+      end
 
-    it "returns http success" do
-      expect(response).to have_http_status(:success)
-    end
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
 
-    it "sets @ideas to all users ideas" do
-      expect(assigns(:ideas).count).to eq(3)
+      it "sets @ideas to all users ideas" do
+        expect(assigns(:ideas).count).to eq(3)
+      end
+    end
+    context "non owner" do
+      let!(:user1) { Fabricate(:user) }
+      let!(:user2) { Fabricate(:user) }
+      (1..3).each do |i|
+        let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
+      end
+
+      before do
+        sign_in user2
+        get :index
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it "sets @ideas to all users ideas" do
+        expect(assigns(:ideas).count).to eq(0)
+      end
     end
   end
 
   describe "GET show" do
+    
     let!(:user1) { Fabricate(:user) }
+    let!(:user2) { Fabricate(:user) }
     (1..3).each do |i|
-        let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
+      let!("idea#{i}".to_sym) { Fabricate(:idea, name: "idea_name#{i}", user_id: user1.id) }
     end
     let!(:note1) { Fabricate(:note, user_id: user1.id) }
     let!(:note2) { Fabricate(:note, user_id: user1.id) }
@@ -54,42 +78,85 @@ RSpec.describe IdeasController, :type => :controller do
     let!(:task2) { Fabricate(:task, user_id: user1.id) }
     let!(:idea_link1) { Fabricate(:idea_link, user_id: user1.id) }
     let!(:idea_link2) { Fabricate(:idea_link, user_id: user1.id) }
-    before do 
-      sign_in user1
-      idea1.notes << [note1, note2]
-      idea1.tasks << [task1, task2]
-      idea1.idea_links << [idea_link1, idea_link2]
-      xhr :get, :show, id: idea1.id, format: 'html'
-    end
-    it "returns http success" do
-      expect(response).to have_http_status(:success)
-    end
+    
+    context "user own ideas" do
+      before do 
+        sign_in user1
+        idea1.notes << [note1, note2]
+        idea1.tasks << [task1, task2]
+        idea1.idea_links << [idea_link1, idea_link2]
+        xhr :get, :show, id: idea1.id, format: 'html'
+      end
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
 
-    it "sets @idea" do
-      expect(assigns(:idea)).to eq(idea1)
-    end
-    it "sets @notes" do
-      expect(assigns(:idea).notes).to match_array([note2, note1])
-    end
+      it "sets @idea" do
+        expect(assigns(:idea)).to eq(idea1)
+      end
+      it "sets @notes" do
+        expect(assigns(:idea).notes).to match_array([note2, note1])
+      end
 
-    it "sets @note" do
-      expect(assigns(:note)).to be_a Note
-    end
+      it "sets @note" do
+        expect(assigns(:note)).to be_a Note
+      end
 
-    it "loads idea tasks into @tasks" do
-      expect(assigns(:tasks).count).to eq(2)
-    end
+      it "loads idea tasks into @tasks" do
+        expect(assigns(:tasks).count).to eq(2)
+      end
 
-    it "sets @task" do
-      expect(assigns(:task)).to be_a Task
-    end
+      it "sets @task" do
+        expect(assigns(:task)).to be_a Task
+      end
 
-    it "sets @idea_link" do
-      expect(assigns(:idea_link)).to be_a IdeaLink
-    end
+      it "sets @idea_link" do
+        expect(assigns(:idea_link)).to be_a IdeaLink
+      end
 
-    it "loads idea idea_links into @idea_link" do
-      expect(assigns(:idea_links)).to match_array([idea_link1, idea_link2])
+      it "loads idea idea_links into @idea_link" do
+        expect(assigns(:idea_links)).to match_array([idea_link1, idea_link2])
+      end
+    end
+    context "non user views" do
+      before do 
+        sign_in user2
+        idea1.notes << [note1, note2]
+        idea1.tasks << [task1, task2]
+        idea1.idea_links << [idea_link1, idea_link2]
+        xhr :get, :show, id: idea1.id, format: 'html'
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it "sets @idea" do
+        expect(assigns(:idea)).to eq(idea1)
+      end
+      it "sets @notes" do
+        expect(assigns(:idea).notes).to match_array([note2, note1])
+      end
+
+      it "sets @note" do
+        expect(assigns(:note)).to be_a Note
+      end
+
+      it "loads idea tasks into @tasks" do
+        expect(assigns(:tasks).count).to eq(2)
+      end
+
+      it "sets @task" do
+        expect(assigns(:task)).to be_a Task
+      end
+
+      it "sets @idea_link" do
+        expect(assigns(:idea_link)).to be_a IdeaLink
+      end
+
+      it "loads idea idea_links into @idea_link" do
+        expect(assigns(:idea_links)).to match_array([idea_link1, idea_link2])
+      end
     end
   end
 

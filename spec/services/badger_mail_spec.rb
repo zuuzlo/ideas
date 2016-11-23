@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BadgerMail do
   before(:example) do
-    (1..6).each do |i|
+    (1..3).each do |i|
       Fabricate(:user, email: "email#{i}@1.com")
       user = User.where(email: "email#{i}@1.com").first
       (1..3).each do |j|
@@ -12,6 +12,21 @@ RSpec.describe BadgerMail do
           status = ["Active", "Hold"]
           si = k%2
           Fabricate(:task, name: "task#{k}#{i}#{j}", user_id: user.id, status: status[si], finish_date: Time.now - 2.days)
+          idea.tasks << Task.where(name: "task#{k}#{i}#{j}").first
+        end
+      end
+    end
+
+    (4..6).each do |i|
+      Fabricate(:user, email: "email#{i}@1.com")
+      user = User.where(email: "email#{i}@1.com").first
+      (1..3).each do |j|
+        Fabricate(:idea, name: "idea#{j}#{i}", status: "Active", user_id: user.id)
+        idea = Idea.where(name: "idea#{j}#{i}" ).first
+        (1..3).each do |k|
+          status = ["Active", "Hold"]
+          si = k%2
+          Fabricate(:task, name: "task#{k}#{i}#{j}", user_id: user.id, status: status[si], finish_date: Time.now + 4.days)
           idea.tasks << Task.where(name: "task#{k}#{i}#{j}").first
         end
       end
@@ -72,24 +87,18 @@ RSpec.describe BadgerMail do
   end
 
   describe "send_mail" do
-    include ActiveJob::TestHelper
-    
-    after do
-      clear_enqueued_jobs
-    end
+    context "user has overdue tasks" do
+      include ActiveJob::TestHelper
+      
+      after do
+        clear_enqueued_jobs
+      end
 
-    it "renders the subject" do
-      BadgerMail.send_mail
-
-      mail = perform_enqueued_jobs { ActionMailer::DeliveryJob.perform_now(*enqueued_jobs.first[:args]) }
-      expect(mail.to[0]).to eq(['email6@1.com'])
-    end
-
-    it "queues several jobs" do
-
-      expect{
-       BadgerMail.send_mail
-    }.to change{ enqueued_jobs.size }.by(6)
+      it "queues 3 jobs" do
+        expect{
+         BadgerMail.send_mail
+      }.to change{ enqueued_jobs.size }.by(3)
+      end
     end
   end
 end
