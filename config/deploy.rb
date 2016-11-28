@@ -62,7 +62,7 @@ set :normalize_asset_timestamps, %w{public/images public/javascripts public/styl
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
-set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
+set :sidekiq_config, "#{fetch(:deploy_to)}/current/config/sidekiq.yml"
 set :pty, false
 
 set(:config_files, %w(
