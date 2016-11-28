@@ -62,6 +62,8 @@ set :normalize_asset_timestamps, %w{public/images public/javascripts public/styl
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
+set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
+set :pty, false
 
 set(:config_files, %w(
   nginx.conf
@@ -112,6 +114,7 @@ namespace :deploy do
   # As of Capistrano 3.1, the `deploy:restart` task is not called
   # automatically.
   after 'deploy:publishing', 'deploy:restart'
+  after 'deploy:publishing', 'sidekiq:restart'
 =begin
   Rake::Task['deploy:assets:backup_manifest'].clear_actions
   namespace :deploy do
