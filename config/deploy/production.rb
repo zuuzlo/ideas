@@ -25,6 +25,6 @@ set :unicorn_worker_count, 1
 
 # whether we're using ssl or not, used for building nginx
 # config file
-set :enable_ssl, false
+set :enable_ssl, true
 
 set :sidekiq_config, "#{fetch(:deploy_to)}/current/config/sidekiq.yml"
