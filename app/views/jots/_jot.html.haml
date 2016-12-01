@@ -7,8 +7,6 @@
       = link_to move_down_jot_path(jot), remote: true do
         %span.glyphicon.glyphicon-circle-arrow-down
   %td
-    #{jot.position}
-  %td
     #{jot.context}
   %td
     = bootstrap_form_tag(url: "#{to_new_task_jot_path(jot)}", layout: :inline, remote: true, :html => {:class => "form-jot"}) do |f|
@@ -22,7 +20,8 @@
   %td
     #{ time_ago_in_words(jot.created_at) } ago
   %td
-    = link_to edit_jot_path(jot), remote: true do
-      %span.glyphicon.glyphicon-pencil
-    = link_to jot_path(jot), method: :delete, remote: true, data: { confirm: 'Are you sure?' } do
-      %span.glyphicon.glyphicon-trash
+    .btn-group.btn-group-sm
+      = link_to edit_jot_path(jot), class: "btn btn-primary", remote: true do
+        %span.glyphicon.glyphicon-pencil
+      = link_to jot_path(jot), method: :delete, class: "btn btn-primary", remote: true, data: { confirm: 'Are you sure?' } do
+        %span.glyphicon.glyphicon-trash

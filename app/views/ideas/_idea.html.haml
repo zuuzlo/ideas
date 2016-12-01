@@ -20,7 +20,8 @@
   %td
     = idea.tasks.count
   %td
-    = link_to edit_idea_path(idea), remote: true do
-      %span.glyphicon.glyphicon-pencil
-    = link_to idea_path(idea), method: :delete, remote: true, data: { confirm: 'Are you sure?' } do
-      %span.glyphicon.glyphicon-trash
+    .btn-group.btn-group-sm
+      = link_to edit_idea_path(idea), class: "btn btn-primary", remote: true do
+        %span.glyphicon.glyphicon-pencil
+      = link_to idea_path(idea), method: :delete, class: "btn btn-primary", remote: true, data: { confirm: 'Are you sure?' } do
+        %span.glyphicon.glyphicon-trash
