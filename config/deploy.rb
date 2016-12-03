@@ -102,7 +102,7 @@ namespace :deploy do
   before :deploy, "deploy:check_revision"
   # only allow a deploy with passing tests to deployed
   #before :deploy, "deploy:run_tests"
-  
+  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
   after :finishing, 'deploy:cleanup'
 
   # remove the default nginx configuration as it will tend
