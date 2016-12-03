@@ -69,6 +69,8 @@ set(:config_files, %w(
   nginx.conf
   unicorn.rb
   unicorn_init.sh
+  sidekiq_init.sh
+  sidekiq.yml
 ))
 
 
@@ -81,11 +83,15 @@ set(:symlinks, [
   {
     source: "unicorn_init.sh",
     link: "/etc/init.d/unicorn_#{fetch(:full_app_name)}"
+  },
+  { source: "sidekiq_init.sh",
+    link: "/etc/init.d/sidekiq_#{fetch(:full_app_name)}"
   }
 ])
 
 set(:executable_config_files, %w(
   unicorn_init.sh
+  sidekiq_init.sh
 ))
 
 after 'deploy:setup_config', 'nginx:reload'
@@ -114,7 +120,7 @@ namespace :deploy do
   # As of Capistrano 3.1, the `deploy:restart` task is not called
   # automatically.
   after 'deploy:publishing', 'deploy:restart'
-  after 'deploy:publishing', 'sidekiq:restart'
+  #after 'deploy:publishing', 'sidekiq:restart'
 =begin
   Rake::Task['deploy:assets:backup_manifest'].clear_actions
   namespace :deploy do

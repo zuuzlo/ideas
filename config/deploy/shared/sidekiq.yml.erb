@@ -1,0 +1,7 @@
+<%= fetch(:rails_env) %>:
+  concurrency: 2
+  queues:
+  - mailers
+  - default
+  - [high_priority, 2]
+  daemon: true
