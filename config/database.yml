@@ -13,3 +13,11 @@ test:
   pool: 5
   username: kirk
   password: sd3472307
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: ideas_development
+  pool: 5
+  username: kirk
+  password: sd3472307

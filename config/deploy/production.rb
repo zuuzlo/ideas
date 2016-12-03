@@ -27,4 +27,4 @@ set :unicorn_worker_count, 2
 # config file
 set :enable_ssl, true
 
-#set :sidekiq_config, "#{fetch(:deploy_to)}/current/config/sidekiq.yml"
+set :sidekiq_config, "#{fetch(:deploy_to)}/shared/config/sidekiq.yml"
