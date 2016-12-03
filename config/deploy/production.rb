@@ -21,10 +21,10 @@ set :rails_env, :production
 
 # number of unicorn workers, this will be reflected in
 # the unicorn.rb and the monit configs
-set :unicorn_worker_count, 1
+set :unicorn_worker_count, 2
 
 # whether we're using ssl or not, used for building nginx
 # config file
 set :enable_ssl, true
 
-set :sidekiq_config, "#{fetch(:deploy_to)}/current/config/sidekiq.yml"
+#set :sidekiq_config, "#{fetch(:deploy_to)}/current/config/sidekiq.yml"
