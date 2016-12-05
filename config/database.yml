@@ -17,7 +17,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: ideas_development
+  database: ideas_production
   pool: 5
   username: kirk
   password: sd3472307

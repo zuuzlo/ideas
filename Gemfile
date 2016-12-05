@@ -32,6 +32,7 @@ gem 'fabrication'
 gem 'acts_as_list'
 
 gem 'unicorn'
+gem 'unicorn-worker-killer'
 gem "unicorn-rails"
 gem 'sidekiq'
 gem 'redis'
