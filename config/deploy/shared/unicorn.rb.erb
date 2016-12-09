@@ -10,22 +10,25 @@ timeout 30
 preload_app true
 
 before_fork do |server, worker|
-  Signal.trap 'TERM' do
-    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
-    Process.kill 'QUIT', Process.pid
+  defined?(ActiveRecord::Base) and
+  ActiveRecord::Base.connection.disconnect!
+  # Quit the old unicorn process
+  old_pid = "#{server.config[:pid]}.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    puts "We've got an old pid and server pid is not the old pid"
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+      puts "killing master process (good thing tm)"
+    rescue Errno::ENOENT, Errno::ESRCH
+      puts "unicorn master already killed"
+    end
   end
-
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |server, worker|
-  Signal.trap 'TERM' do
-    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
-  end
-
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
-
-  Sidekiq.configure_client do |config|
-    config.redis = { size: 1, namespace: 'sidekiq_<%= fetch(:rails_env) %>' }
-  end
+  port = 5000 + worker.nr
+  child_pid = server.config[:pid].sub('.pid', ".#{port}.pid")
+  system("echo #{Process.pid} > #{child_pid}")
+    defined?(ActiveRecord::Base) and
+      ActiveRecord::Base.establish_connection
 end
