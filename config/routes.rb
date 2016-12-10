@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   
   devise_for :users, :path => "accounts"
   #root to: 'devise/sessions#new'
-  
-  mount Sidekiq::Web, :at => '/sidekiq'
+
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   resources :ideas do
     resources :notes do
